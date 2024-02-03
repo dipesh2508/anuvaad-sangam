@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.radial {
+  border-radius: 500px;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #9d97ed 0%,
+    rgba(157, 151, 237, 0.3) 46.9%,
+    rgba(157, 151, 237, 0) 100%
+  );
+}
