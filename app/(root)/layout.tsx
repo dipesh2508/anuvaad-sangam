@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat, Raleway } from "next/font/google";
-import '../globals.css';
+import "../globals.css";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-const raleway = Raleway({ subsets: ["latin"]});
+const raleway = Raleway({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} ${raleway.className}`}>{children}</body>
+      <body className={`${montserrat.className} ${raleway.className}`}>
+        {children}
+      </body>
     </html>
   );
 }

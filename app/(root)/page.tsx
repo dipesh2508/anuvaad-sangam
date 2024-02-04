@@ -1,9 +1,11 @@
 import hero from "@/assets/images/hero.png";
 import hero_asset from "@/assets/hero_asset.svg";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 
 export default function Home() {
+
+
   return (
     <main className="text-seconday-3 relative overflow-hidden bg-primary-1 text-xl font-semibold">
       <section className="grid h-screen w-screen grid-cols-12 content-center bg-primary-5 px-24">
@@ -30,6 +32,7 @@ export default function Home() {
           </div>
         </div>
         <div className="radial absolute -bottom-48 -right-48 h-96 w-96 overflow-hidden rounded-full"></div>
+
       </section>
     </main>
   );
