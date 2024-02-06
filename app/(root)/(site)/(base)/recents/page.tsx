@@ -1,6 +1,7 @@
 'use client'
 import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 import { useRouter, usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const Page = () => {
   const router = useRouter();
@@ -10,9 +11,7 @@ const Page = () => {
   return (
     <SignedIn>
       <SignOutButton signOutCallback={() => router.push("/sign-in")}>
-        <div className="flex cursor-pointer gap-4 p-4">
-          <p className="text-primary-6 max-lg:hidden">Logout</p>
-        </div>
+        <Button>Log out</Button>
       </SignOutButton>
     </SignedIn>
   );

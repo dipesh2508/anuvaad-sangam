@@ -2,7 +2,7 @@ import hero from "@/assets/images/hero.png";
 import hero_asset from "@/assets/hero_asset.svg";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-
+import Link from "next/link";
 const Hero = () => {
   return (
     <section className="grid h-[90vh] w-screen grid-cols-12 content-center bg-primary-5 px-24">
@@ -23,12 +23,14 @@ const Hero = () => {
           fermentum dui. Amet mi hendrerit etiam ipsum.{" "}
         </div>
         <div className="flex ">
-          <Button variant={"secondary"} className="my-auto px-6">
-            Register Now
-          </Button>
+          <Link href="/sign-up">
+            <Button variant={"secondary"} className="my-auto px-6">
+              Register Now
+            </Button>
+          </Link>
         </div>
       </div>
-      <div className="radial absolute -bottom-48 -right-48 h-96 w-96 overflow-hidden rounded-full"></div>
+      <div className="radial absolute top-[80vh] -right-48 h-96 w-96 overflow-hidden rounded-full"></div>
     </section>
   );
 };
