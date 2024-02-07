@@ -14,6 +14,7 @@ const buttonVariants = cva(
           "bg-secondary-2 border-2 border-secondary-2 text-light-1 hover:text-secondary-2 hover:bg-transparent",
         outline:
           "bg-light-3 border-2 border-primary-2 text-primary-6 hover:bg-primary-2",
+        cta: "bg-secondary-4 border-2 border-secondary-4 text-light-1 hover:text-secondary-4 font-primary  px-6 font-primary hover:bg-transparent",
       },
       size: {
         default: "h-10 px-4 py-4",
@@ -26,7 +27,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -45,7 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

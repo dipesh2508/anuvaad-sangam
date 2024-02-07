@@ -2,6 +2,7 @@ import PublicNavBar from "@/components/shared/PublicNavBar";
 import Hero from "@/components/home/hero";
 import Feature1 from "@/components/home/feature1";
 import Feature2 from "@/components/home/feature2";
+import CTA from "@/components/home/cta";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Feature1 />
       <Feature2 />
+      <CTA />
     </main>
   );
 }

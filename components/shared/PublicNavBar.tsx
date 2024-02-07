@@ -12,9 +12,9 @@ const PublicNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="z-50 h-24 border-gray-200 bg-primary-5 text-light-3">
+    <nav className="z-50 h-24 w-full border-gray-200 bg-primary-5 text-light-3">
       <div className="mx-auto flex max-h-96 max-w-screen-xl flex-wrap items-center justify-between px-2 pt-2 md:px-0">
-        <a href="" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <Image
             src={logo}
             height={75}
@@ -22,7 +22,8 @@ const PublicNavBar = () => {
             alt="Health Optima"
             loading="lazy"
           />
-        </a>
+        </Link>
+
         <button
           data-collapse-toggle="navbar-default"
           type="button"
@@ -131,12 +132,12 @@ const PublicNavBar = () => {
             </Link>
           ))}
           <Link href="/sign-in">
-            <Button variant={"secondary"} className="px-8">
+            <Button variant={"secondary"} className="px-8 opacity-100">
               Login
             </Button>
           </Link>
           <Link href="/sign-up">
-            <Button variant={"outline"} className="px-8">
+            <Button variant={"outline"} className="px-8 opacity-100">
               Register
             </Button>
           </Link>
