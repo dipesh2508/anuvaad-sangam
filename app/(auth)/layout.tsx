@@ -1,6 +1,10 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import '../globals.css';
 import { Montserrat } from "next/font/google";
+import PublicNavBar from "@/components/shared/PublicNavBar";
+import SkeletonForm from "@/components/shared/SkeletonForm";
+
+import { Suspense } from "react";
 
 export const metadata = {
   title: 'Next.js',
@@ -19,7 +23,12 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${montserrat.className} bg-dark-1`}>
           <div className="w-full flex justify-center items-center min-h-screen">
+          <div className="flex w-full flex-grow flex-col items-center bg-light-4">
+      <PublicNavBar />
+      <Suspense fallback={<SkeletonForm />}>
             {children}
+          </Suspense>
+            </div>
           </div>
         </body>
       </html>

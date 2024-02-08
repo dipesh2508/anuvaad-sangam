@@ -12,14 +12,14 @@ const PublicNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="z-50 h-24 w-full border-gray-200 bg-primary-5 text-light-3">
+    <nav className="z-50 h-24 w-full top-0 border-gray-200 bg-primary-5 text-light-3">
       <div className="mx-auto flex max-h-96 max-w-screen-xl flex-wrap items-center justify-between px-2 pt-2 md:px-0">
         <Link href="/" className="flex items-center">
           <Image
             src={logo}
             height={75}
             className="m-0"
-            alt="Health Optima"
+            alt="Anuvaad Sangam Logo"
             loading="lazy"
           />
         </Link>
@@ -74,7 +74,7 @@ const PublicNavBar = () => {
             {navLinks.map((nav) => (
               <li key={nav.id}>
                 <Link
-                  href={`/${nav.id === "contact" ? "#contact" : `${nav.id}`}`}
+                  href={`/${nav.id}`}
                   className="duration-250 
                     relative 
                     block 

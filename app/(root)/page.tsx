@@ -3,6 +3,7 @@ import Hero from "@/components/home/hero";
 import Feature1 from "@/components/home/feature1";
 import Feature2 from "@/components/home/feature2";
 import CTA from "@/components/home/cta";
+import Feature3 from "@/components/home/feature3";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Feature1 />
       <Feature2 />
       <CTA />
+      <Feature3 />
     </main>
   );
 }
