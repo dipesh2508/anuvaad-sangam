@@ -39,6 +39,11 @@ const config = {
         'light-2': '#F5F6FA',
         'light-3': '#F3F3F3',
         'light-4': '#EDEDED',
+        'facebook': '#1877F2',
+        'insta1': '#4F5BD5',
+        'insta3': '#D62976',
+        'insta5': '#FEDA75',
+
         glassmorphism: "rgba(16, 16, 18, 0.60)",
       },
       fontFamily: {

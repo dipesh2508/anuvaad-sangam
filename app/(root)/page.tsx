@@ -1,4 +1,5 @@
 import PublicNavBar from "@/components/shared/PublicNavBar";
+import PublicFooter from "@/components/shared/PublicFooter";
 import Hero from "@/components/home/hero";
 import Feature1 from "@/components/home/feature1";
 import Feature2 from "@/components/home/feature2";
@@ -14,6 +15,7 @@ export default function Home() {
       <Feature2 />
       <CTA />
       <Feature3 />
+      <PublicFooter />
     </main>
   );
 }

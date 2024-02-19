@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import '../globals.css';
 import { Montserrat } from "next/font/google";
 import PublicNavBar from "@/components/shared/PublicNavBar";
+import PublicFooter from "@/components/shared/PublicFooter";
 import SkeletonForm from "@/components/shared/SkeletonForm";
 
 import { Suspense } from "react";
