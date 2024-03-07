@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -9,11 +9,13 @@ const Page = () => {
 
   const { userId } = useAuth();
   return (
-    <SignedIn>
-      <SignOutButton signOutCallback={() => router.push("/sign-in")}>
-        <Button>Log out</Button>
-      </SignOutButton>
-    </SignedIn>
+    <section>
+      <SignedIn>
+        <SignOutButton signOutCallback={() => router.push("/")}>
+          <Button>Log out</Button>
+        </SignOutButton>
+      </SignedIn>
+    </section>
   );
 };
 
