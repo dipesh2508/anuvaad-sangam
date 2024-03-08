@@ -1,11 +1,10 @@
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, currentUser } from "@clerk/nextjs";
 import "../globals.css";
 import { Montserrat } from "next/font/google";
 import PublicNavBar from "@/components/shared/PublicNavBar";
 import PublicFooter from "@/components/shared/PublicFooter";
-import SkeletonForm from "@/components/shared/SkeletonForm";
+import { redirect } from "next/navigation";
 
-import { Suspense } from "react";
 
 export const metadata = {
   title: "Next.js",
@@ -14,21 +13,25 @@ export const metadata = {
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user = await currentUser();
+  if(user){
+    redirect("/recents");
+  }
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={`${montserrat.className} bg-dark-1`}>
-          <div className="flex min-h-screen w-full items-center justify-center">
-            <div className="flex w-full flex-grow flex-col items-center bg-light-4">
+          <main className="flex min-h-screen w-full items-center justify-center">
+            <section className="flex w-full flex-grow flex-col items-center bg-light-4">
               <PublicNavBar />
-              <Suspense fallback={<SkeletonForm />}>{children}</Suspense>
-            </div>
-          </div>
+              {children}
+            </section>
+          </main>
           <PublicFooter />
         </body>
       </html>

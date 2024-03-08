@@ -9,12 +9,8 @@ const Page = () => {
 
   const { userId } = useAuth();
   return (
-    <section>
-      <SignedIn>
-        <SignOutButton signOutCallback={() => router.push("/")}>
-          <Button>Log out</Button>
-        </SignOutButton>
-      </SignedIn>
+    <section className="w-full h-full">
+      
     </section>
   );
 };

@@ -3,6 +3,9 @@ import { FaRegClock } from "react-icons/fa6";
 import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { MdOutlineTranslate } from "react-icons/md";
+import { IoHome } from "react-icons/io5";
+import { IoPersonCircle } from "react-icons/io5";
+import { IoIosHelpCircle } from "react-icons/io";
 
 export interface INavLink {
     id: string;
@@ -51,5 +54,32 @@ export const sideBarLinks: ISideBarLink[] = [
 		title: "Translate",
 		route: "/translate",
 		icon: MdOutlineTranslate,
+	}
+]
+
+export const SettingSideBarLinks: ISideBarLink[] = [
+	{
+		id: 1,
+		title: "Home",
+		route: "/recents",
+		icon: IoHome,
+	},
+	{
+		id: 2,
+		title: "Profile",
+		route: "/profile",
+		icon: IoPersonCircle,
+	},
+	{
+		id: 3,
+		title: "Lanugage",
+		route: "/language",
+		icon: MdOutlineTranslate,
+	},
+	{
+		id: 4,
+		title: "Help",
+		route: "/help",
+		icon: IoIosHelpCircle,
 	}
 ]

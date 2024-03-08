@@ -34,7 +34,7 @@ const setting = pathname === "/settings";
           );
         })}
         <hr />
-        <Link href="/settings">
+        <Link href="/profile">
               <div
                 className={`flex items-center gap-4 rounded-md p-2 ${
                   setting ? "bg-primary-1 text-primary-6" : "text-primary-8"

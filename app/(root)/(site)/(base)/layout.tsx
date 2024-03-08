@@ -1,17 +1,24 @@
 import LeftSideBar from "@/components/shared/LeftSideBar";
-import NavBar from "@/components/shared/NavBar";
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const user = await currentUser();
+  if(!user){
+    redirect("/sign-in");
+  }
+  
   return (
-    <div className="flex flex-row">
+    <section className="flex flex-row">
       <LeftSideBar />
-      <section className="flex min-h-screen flex-1 flex-col items-center px-6 pb-10 pt-28 max-md:pb-32 sm:px-10">
+      <div className="flex min-h-screen flex-1 flex-col items-center px-6 pb-10 py-8 max-md:pb-32 sm:px-10">
         {children}
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
