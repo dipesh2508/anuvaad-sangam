@@ -15,12 +15,15 @@ const buttonVariants = cva(
         outline:
           "bg-light-3 border-2 border-primary-2 text-primary-6 hover:bg-primary-2",
         cta: "bg-secondary-4 border-2 border-secondary-4 text-light-1 hover:text-secondary-4 font-primary  px-6 font-primary hover:bg-transparent",
+        logout:
+          "bg-primary-5 text-light-1 hover:bg-transparent hover:text-primary-5 border-2 border-primary-5",
       },
       size: {
         default: "h-10 px-4 py-4",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+        logout: "h-10 p-3",
       },
     },
     defaultVariants: {
