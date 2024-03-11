@@ -1,4 +1,5 @@
 import Contact from "@/assets/images/Contact.png";
+import HelpForm from "@/components/forms/HelpForm";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebook, FaLocationDot, FaXTwitter } from "react-icons/fa6";
@@ -17,6 +18,9 @@ const Page = () => {
             Feel free to connect with us anytime. We will get back to you as
             soon as we can.
           </p>
+        </div>
+        <div className="px-2 mt-8">
+          <HelpForm />
         </div>
       </div>
       <div className="  py-12">
