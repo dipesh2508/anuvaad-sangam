@@ -70,7 +70,7 @@ const HelpForm = () => {
                 Help Description
               </FormLabel>
               <FormControl>
-                <Textarea placeholder="" {...field} />
+                <Textarea placeholder="Description" {...field} />
               </FormControl>
               <FormDescription>
                 Write the description about the Issue
@@ -85,7 +85,7 @@ const HelpForm = () => {
           className="px-8"
           type="submit"
           >
-          Submit
+          Send Message
         </Button>
             </div>
       </form>
