@@ -16,12 +16,13 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 
 const helpFormSchema = z.object({
   Email: z.string().email(),
   helpDescription: z
     .string()
-    .min(20, {
+    .min(2, {
       message: "Help Description must be at least 2 characters.",
     })
     .max(500, {
@@ -38,7 +39,15 @@ const HelpForm = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof helpFormSchema>) {}
+  async function onSubmit(values: z.infer<typeof helpFormSchema>) {
+    toast({
+      title: "Help Request Sent!",
+      description: 'We have received your help request. We will get back to you soon.',
+    });
+
+    console.log(values);
+    form.reset();
+  }
   return (
     <Form {...form}>
       <form

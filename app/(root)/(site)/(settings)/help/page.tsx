@@ -19,7 +19,7 @@ const Page = () => {
             soon as we can.
           </p>
         </div>
-        <div className="px-2 mt-8">
+        <div className="mt-8 px-2">
           <HelpForm />
         </div>
       </div>

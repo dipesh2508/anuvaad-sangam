@@ -1,4 +1,5 @@
 import SettingSideBar from "@/components/shared/SettingSideBar";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RootLayout({
   children,
@@ -9,6 +10,7 @@ export default function RootLayout({
     <div className="flex flex-row">
         <SettingSideBar />
         {children}
+        <Toaster />
     </div>
   );
 }

@@ -41,7 +41,14 @@ const LanguageSelectorForm = () => {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    toast({
+      title: 'Language Updated!',
+      description: `Your language has been updated to ${data.language}`,
+    });
     console.log(data.language);
+    //reset the form
+    form.reset();
+
   }
 
   return (
