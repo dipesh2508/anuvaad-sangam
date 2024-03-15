@@ -7,12 +7,24 @@ import { IoExitOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
 import { SignOutButton, SignedIn } from "@clerk/nextjs";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 const SettingSideBar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
   return (
-    <section className="border-r-dark-4 bg-dark-2 max-md:hidden sticky top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto border-r pb-5 pt-28">
+    <section className="border-r-dark-4 bg-dark-2 sticky top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto border-r pb-5 pt-28 max-md:hidden">
       <div className="flex w-full flex-1 flex-col gap-6 px-6">
         {SettingSideBarLinks.map((link) => {
           const isActive =
@@ -35,14 +47,30 @@ const SettingSideBar = () => {
         })}
         <hr />
         <div className="mt-28">
-          <SignedIn>
-            <SignOutButton signOutCallback={() => router.push("/")}>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
               <Button className="h-max w-full gap-3 p-4" variant="logout">
                 <IoExitOutline size={24} />
                 Log Out
               </Button>
-            </SignOutButton>
-          </SignedIn>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  {"You'll be logged out and redirected to the homepage."}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <SignedIn>
+                  <SignOutButton signOutCallback={() => router.push("/")}>
+                    <AlertDialogAction>Continue</AlertDialogAction>
+                  </SignOutButton>
+                </SignedIn>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </div>
     </section>
