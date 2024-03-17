@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-import { languages } from "@/constants/language";
+import { languages } from "@/lib/constants/language";
 
 const FormSchema = z.object({
   language: z.string({

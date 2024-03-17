@@ -1,6 +1,6 @@
 "use client";
 
-import { SettingSideBarLinks } from "@/constants";
+import { SettingSideBarLinks } from "@/lib/constants";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { IoExitOutline } from "react-icons/io5";

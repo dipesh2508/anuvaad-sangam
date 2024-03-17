@@ -1,12 +1,20 @@
 import mongoose from "mongoose";
+import { IUser } from "./user.model";
+export interface IMessage {
+  body1: string;
+  body2: string;
+  senderId: IUser;
+  language1: string;
+  language2: string;
+}
 
-const messageSchema = new mongoose.Schema(
+const messageSchema = new mongoose.Schema<IMessage>(
   {
     body1: {
-      type: String
+      type: String,
     },
     body2: {
-      type: String
+      type: String,
     },
     senderId: {
       type: mongoose.Schema.Types.ObjectId,

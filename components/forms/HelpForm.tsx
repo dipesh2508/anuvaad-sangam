@@ -18,31 +18,22 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
-const helpFormSchema = z.object({
-  Email: z.string().email(),
-  helpDescription: z
-    .string()
-    .min(2, {
-      message: "Help Description must be at least 2 characters.",
-    })
-    .max(500, {
-      message: "Help Description must be at under 500 characters.",
-    }),
-});
+import { helpFormValidation } from "@/lib/validations/helpForm";
 
 const HelpForm = () => {
-  const form = useForm<z.infer<typeof helpFormSchema>>({
-    resolver: zodResolver(helpFormSchema),
+  const form = useForm<z.infer<typeof helpFormValidation>>({
+    resolver: zodResolver(helpFormValidation),
     defaultValues: {
       Email: "",
       helpDescription: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof helpFormSchema>) {
+  async function onSubmit(values: z.infer<typeof helpFormValidation>) {
     toast({
       title: "Help Request Sent!",
-      description: 'We have received your help request. We will get back to you soon.',
+      description:
+        "We have received your help request. We will get back to you soon.",
     });
 
     console.log(values);
@@ -89,14 +80,10 @@ const HelpForm = () => {
           )}
         />
         <div>
-
-        <Button
-          className="px-8"
-          type="submit"
-          >
-          Send Message
-        </Button>
-            </div>
+          <Button className="px-8" type="submit">
+            Send Message
+          </Button>
+        </div>
       </form>
     </Form>
   );
