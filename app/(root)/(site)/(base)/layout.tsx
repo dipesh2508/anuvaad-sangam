@@ -14,9 +14,9 @@ export default async function RootLayout({
   }
   
   return (
-    <section className="flex flex-row">
+    <section className="w-full grid grid-cols-12">
       <LeftSideBar />
-      <div className="flex min-h-screen flex-1 flex-col items-center px-6 pb-10 py-8 max-md:pb-32 sm:px-10">
+      <div className="col-span-11 w-full">
         {children}
       </div>
     </section>
