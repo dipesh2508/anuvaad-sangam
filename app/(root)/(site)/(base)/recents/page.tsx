@@ -26,7 +26,7 @@ const Page = () => {
         <div className=" mt-4 h-[1px] w-10/12 bg-primary-3"></div>
         <div className="mt-4 w-full px-7">
           <h3 className=" font-primary text-lg font-medium">Last Chats</h3>
-          <div className="flex flex-col gap-2 mt-2">
+          <div className="flex flex-col gap-2 mt-2 mb-12">
 
           {ChatData.map((chat) => (
             <Recents
