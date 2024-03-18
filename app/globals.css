@@ -71,3 +71,7 @@
     --ring: 142.4 71.8% 29.2%;
   }
 }
+
+.swiper-pagination-clickable .swiper-pagination-bullet {
+  background: #7165E3;
+}

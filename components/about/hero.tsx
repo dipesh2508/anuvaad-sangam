@@ -1,4 +1,4 @@
-import hero from "@/assets/images/hero.png";
+import hero from "@/assets/images/aboutHero.png";
 import hero_asset from "@/assets/hero_asset.svg";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <section className="flex w-screen  flex-col content-center gap-8 bg-primary-5 px-8 py-12 text-center md:grid  md:h-[90vh] md:grid-cols-12 md:gap-0 md:px-24 md:py-0">
       <div className="radial absolute -left-48 -top-48 overflow-hidden rounded-full"></div>
-      <div className="mx-16 md:col-span-5 md:mx-0 md:my-auto">
+      <div className="mx-16 md:col-span-5 md:mx-12 md:my-auto">
         {" "}
         <Image src={hero} alt="hero image" />
       </div>

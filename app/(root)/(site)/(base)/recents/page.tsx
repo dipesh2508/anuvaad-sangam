@@ -14,11 +14,11 @@ const Page = () => {
 
   const { userId } = useAuth();
   return (
-    <div className="grid h-screen w-full grid-cols-12">
+    <div className="grid h-[90vh] w-full grid-cols-12">
       <div className="col-span-9">
         <Chat />
       </div>
-      <div className="col-span-3 h-screen overflow-scroll overflow-x-hidden flex flex-col items-center border-l border-l-primary-3 pb-8">
+      <div className="col-span-3 h-[90vh] overflow-scroll overflow-x-hidden flex flex-col items-center border-l border-l-primary-3 pb-8">
         <div className="mt-6 flex h-36 w-36 flex-col content-center justify-center gap-4">
           <Image src={avatar} alt="avatar" height={100} className="mx-auto" />
           <h2 className="text-center text-xl font-medium">Dipesh Ranjan</h2>

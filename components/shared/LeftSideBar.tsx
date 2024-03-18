@@ -12,7 +12,7 @@ const LeftSideBar = () => {
   const setting = pathname === "/settings";
 
   return (
-    <section className="border-r-primary-3 flex h-screen w-max flex-col justify-between overflow-auto border-r pb-5 pt-28 max-md:hidden">
+    <section className="border-r-primary-3 flex h-[90vh] w-max flex-col justify-between overflow-auto border-r pb-5 pt-28 max-md:hidden">
       <div className="flex w-full flex-1 flex-col gap-6 px-6">
         {sideBarLinks.map((link) => {
           const isActive =

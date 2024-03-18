@@ -23,7 +23,7 @@ const Mv = () => {
         <h1 className="font-secondary text-3xl font-semibold text-primary-9">
           OUR MISSION
         </h1>
-        <p className="m-4 mt-0 text-justify text-base font-primary font-medium text-secondary-4 md:m-8">
+        <p className="m-4 mt-0 text-justify text-base font-primary font-medium text-secondary-4 md:m-4">
           {
             "Anuvaad Sangam's mission is to bridge the communication gap that language barriers create. We believe everyone deserves to connect and have meaningful conversations, regardless of their native tongue. Through our innovative real-time translation technology, we empower users to chat effortlessly across borders and cultures. By seamlessly converting messages into your preferred language, we foster understanding and build a global community where everyone can be heard and understood."
           }

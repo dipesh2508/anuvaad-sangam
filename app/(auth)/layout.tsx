@@ -26,7 +26,7 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${montserrat.className} bg-dark-1`}>
-          <main className="flex min-h-screen w-full items-center justify-center">
+          <main className="flex min-h-[90vh] w-full items-center justify-center">
             <section className="flex w-full flex-grow flex-col items-center bg-light-4">
               <PublicNavBar />
               {children}

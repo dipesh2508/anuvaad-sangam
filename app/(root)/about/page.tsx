@@ -1,5 +1,6 @@
 import Hero from "@/components/about/hero"
 import Mv from "@/components/about/mv"
+import Team from "@/components/about/team"
 import PublicFooter from "@/components/shared/PublicFooter"
 import PublicNavBar from "@/components/shared/PublicNavBar"
 
@@ -9,6 +10,7 @@ const page = () => {
         <PublicNavBar />
         <Hero />
         <Mv />
+        <Team />
         <PublicFooter />
     </main>
   )

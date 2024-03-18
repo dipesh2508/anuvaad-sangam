@@ -24,7 +24,7 @@ const SettingSideBar = () => {
   const pathname = usePathname();
 
   return (
-    <section className="border-r-dark-4 bg-dark-2 sticky top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto border-r pb-5 pt-28 max-md:hidden">
+    <section className="border-r-dark-4 bg-dark-2 sticky top-0 z-20 flex h-[90vh] w-fit flex-col justify-between overflow-auto border-r pb-5 pt-28 max-md:hidden">
       <div className="flex w-full flex-1 flex-col gap-6 px-6">
         {SettingSideBarLinks.map((link) => {
           const isActive =
