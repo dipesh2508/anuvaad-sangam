@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema<IUser>(
       type: String,
       default: "en",
     },
-    onboarded: boolean,
+    onboarded: Boolean,
   },
   {
     timestamps: true,
