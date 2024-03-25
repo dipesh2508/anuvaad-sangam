@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { IChat } from "./chat.model";
+import { boolean } from "zod";
 
 export interface IUser {
   id: string;
@@ -7,9 +9,10 @@ export interface IUser {
   bio: string;
   image: string;
   email: string;
-  chats: string[];
-  contacts: string[];
   language: string;
+  chats: IChat[];
+  contacts: IChat;
+  onboarded: boolean;
 }
 
 const userSchema = new mongoose.Schema<IUser>(
@@ -55,6 +58,7 @@ const userSchema = new mongoose.Schema<IUser>(
       type: String,
       default: "en",
     },
+    onboarded: boolean,
   },
   {
     timestamps: true,
