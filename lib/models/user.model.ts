@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import {IChat} from '@/lib/models/chat.model'
 export interface IUser {
   id: string;
   name: string;
@@ -7,7 +7,7 @@ export interface IUser {
   bio: string;
   image: string;
   email: string;
-  chats: string[];
+  chats: IChat[];
   contacts: string[];
   language: string;
 }
