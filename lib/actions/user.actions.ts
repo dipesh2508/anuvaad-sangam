@@ -56,6 +56,71 @@ export async function updateUser({
       revalidatePath(path);
     }
   } catch (error: any) {
-    throw new Error(`Failed to create/update user: ${error.message}`);
+    throw new Error(`Failed to create/update user.\nERROR: ${error.message}`);
+  }
+}
+
+interface IUser {
+  username: string;
+  id: string;
+}
+
+export async function addFriendByUsername({
+  username,
+  id,
+}: IUser): Promise<void> {
+  try {
+    connectToDB();
+
+    const OtherUser = await User.findOne({ username });
+
+    if (!OtherUser) {
+      throw new Error(`No user Found!`);
+    }
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      throw new Error(`No active session`);
+    }
+
+    OtherUser.contacts.push(user._id);
+
+    await user.contacts.push(OtherUser._id);
+  } catch (error: any) {
+    throw new Error(`Failed to add user.\nERROR:${error.message}`);
+  }
+}
+
+export async function getAllUsersByUsername(searchParam: String) {
+  try {
+    const searchedUsers = await User.aggregate([
+      {
+        $addFields: {
+          Users: {
+            $regexFindAll: {
+              input: "$username",
+              regex: `^${searchParam}`,
+            },
+          },
+        },
+      },
+      {
+        $limit: 10,
+      },
+      {
+        $project: {
+          result: 1,
+        },
+      },
+    ]);
+
+    if (!searchedUsers) {
+      return "No User found!";
+    }
+
+    return searchedUsers;
+  } catch (error: any) {
+    throw new Error(`Failed to Search user.\nERROR:${error.message}`);
   }
 }
