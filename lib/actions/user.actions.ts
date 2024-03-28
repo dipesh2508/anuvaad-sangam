@@ -124,3 +124,23 @@ export async function getAllUsersByUsername(searchParam: String) {
     throw new Error(`Failed to Search user.\nERROR:${error.message}`);
   }
 }
+
+export async function updateLanguage(userId: String, language: String) {
+  try {
+    connectToDB();
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        language,
+      }
+    );
+
+    if (!user) {
+      return "No User found!";
+    }
+
+    return "Language Updated Successfully.";
+  } catch (error: any) {
+    throw new Error(`Failed to Update language.\nERROR:${error.message}`);
+  }
+}
