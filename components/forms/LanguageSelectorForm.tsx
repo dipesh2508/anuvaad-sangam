@@ -33,6 +33,9 @@ const FormSchema = z.object({
   language: z.string({
     required_error: "Please select a language",
   }),
+  selector: z.string({
+    required_error: "Please select a language",
+  }),
 });
 
 const LanguageSelectorForm = () => {
@@ -45,9 +48,13 @@ const LanguageSelectorForm = () => {
       title: 'Language Updated!',
       description: `Your language has been updated to ${data.language}`,
     });
-    console.log(data.language);
+    console.log(data.selector);
     //reset the form
     form.reset();
+
+    //provide the language to the user
+    //update the user's language in the database
+    
 
   }
 
