@@ -32,6 +32,8 @@ interface Props {
     name: string;
     bio: string;
     image: string;
+    email: string;
+    // language: string;
   };
   btnTitle: string;
 }
@@ -48,8 +50,8 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       name: user?.name || "",
       username: user?.username || "",
       bio: user?.bio || "",
-      language: "en",
-      email: user?.email ||"",
+      // language: "en",
+      // email: user?.email || "",
     },
   });
 
@@ -82,6 +84,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     const blob = values.profile_photo;
 
     const hasImageChanged = isBase64Image(blob);
+    console.log('WORKING')
 
     if (hasImageChanged) {
         const imgRes = await startUpload(files);
@@ -99,9 +102,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       bio: values.bio,
       image: values.profile_photo,
       path: pathname,
-      language: "en",
-      email: "",
-
+      email: "al;jf;"
     });
 
     if (pathname === "/profile/edit") {
