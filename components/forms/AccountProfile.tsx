@@ -7,6 +7,16 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {
   Form,
   FormControl,
   FormDescription,
@@ -23,6 +33,7 @@ import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadThing";
 import { updateUser } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
+import { languages } from "@/lib/constants/language";
 
 interface Props {
   user: {
@@ -33,7 +44,7 @@ interface Props {
     bio: string;
     image: string;
     email: string;
-    // language: string;
+    language: string;
   };
   btnTitle: string;
 }
@@ -50,14 +61,13 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       name: user?.name || "",
       username: user?.username || "",
       bio: user?.bio || "",
-      // language: "en",
-      // email: user?.email || "",
+      language: "English",
     },
   });
 
   const handleImage = (
     e: ChangeEvent<HTMLInputElement>,
-    fieldChange: (value: string) => void
+    fieldChange: (value: string) => void,
   ) => {
     e.preventDefault();
 
@@ -84,14 +94,14 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     const blob = values.profile_photo;
 
     const hasImageChanged = isBase64Image(blob);
-    console.log('WORKING')
+    console.log("WORKING");
 
     if (hasImageChanged) {
-        const imgRes = await startUpload(files);
+      const imgRes = await startUpload(files);
 
-        if (imgRes && imgRes[0].url) {
-            values.profile_photo = imgRes[0].url;
-        }
+      if (imgRes && imgRes[0].url) {
+        values.profile_photo = imgRes[0].url;
+      }
     }
 
     //update user profile
@@ -102,7 +112,8 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       bio: values.bio,
       image: values.profile_photo,
       path: pathname,
-      email: user.email
+      email: user.email,
+      language: values.language
     });
 
     if (pathname === "/profile/edit") {
@@ -143,7 +154,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   />
                 )}
               </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-primary-9">
+              <FormControl className="text-base-semibold flex-1 text-primary-9">
                 <Input
                   type="file"
                   accept="image/*"
@@ -161,9 +172,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="flex flex-col gap-3 w-full">
+            <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="text-slate-900">Name</FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-primary-9">
+              <FormControl className="text-base-semibold flex-1 text-primary-9">
                 <Input
                   type="text"
                   className="account-form_input no focus"
@@ -179,9 +190,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           control={form.control}
           name="username"
           render={({ field }) => (
-            <FormItem className="flex flex-col gap-3 w-full">
+            <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="text-slate-900">Username</FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-primary-9">
+              <FormControl className="text-base-semibold flex-1 text-primary-9">
                 <Input
                   type="text"
                   className="account-form_input no focus"
@@ -197,9 +208,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           control={form.control}
           name="bio"
           render={({ field }) => (
-            <FormItem className="flex flex-col gap-3 w-full">
+            <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="text-slate-900">Bio</FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-primary-9">
+              <FormControl className="text-base-semibold flex-1 text-primary-9">
                 <Textarea
                   rows={10}
                   className="account-form_input no focus"
@@ -210,7 +221,36 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
             </FormItem>
           )}
         />
-
+        <FormField
+          control={form.control}
+          name="language"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Language</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder="Select a Language" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Languages</SelectLabel>
+                    {languages.map(({ language, id }) => (
+                      <SelectItem key={id} value={language}>
+                        {language}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                You can manage your language preferences here.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit" variant="outline">
           Submit
         </Button>

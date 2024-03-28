@@ -20,7 +20,7 @@ interface Params {
   name: string;
   bio: string;
   image: string;
-  // language: string;
+  language: string;
   email: string;
   path: string;
 }
@@ -32,7 +32,7 @@ export async function updateUser({
   path,
   username,
   image,
-  // language,
+  language,
   email,
 }: Params) {
   try {
@@ -46,7 +46,7 @@ export async function updateUser({
         bio,
         image,
         email,
-        // language,
+        language,
         onboarded: true,
       },
       { upsert: true },
