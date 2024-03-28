@@ -18,7 +18,7 @@ async function Page() {
     name: userInfo?.name || user?.firstName || "",
     bio: userInfo?.bio || "",
     image: userInfo?.image || user?.imageUrl,
-    email: userInfo?.email || "",
+    email: userInfo?.email || user.emailAddresses[0].emailAddress,
   };
   return (
     <main className="mx-auto bg-light-4 flex max-w-3xl flex-col justify-start px-10 py-20">

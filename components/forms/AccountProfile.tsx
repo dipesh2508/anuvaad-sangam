@@ -102,13 +102,13 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       bio: values.bio,
       image: values.profile_photo,
       path: pathname,
-      email: "al;jf;"
+      email: user.email
     });
 
     if (pathname === "/profile/edit") {
       router.back();
     } else {
-      router.push("/");
+      router.push("/recents");
     }
   };
 
