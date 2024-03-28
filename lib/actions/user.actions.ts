@@ -140,13 +140,17 @@ export async function updateLanguage(userId: String, language: String) {
       return "Choose different language from the previous one.";
     }
 
-    const updatedUserLanguage = await User.findByIdAndUpdate(userId, {
-      language,
-    });
+    user.language = language;
 
-    if (!user) {
-      return "No User found!";
-    }
+    await user.save();
+
+    // const updatedUserLanguage = await User.findByIdAndUpdate(userId, {
+    //   language,
+    // });
+
+    // if (!user) {
+    //   return "No User found!";
+    // }
 
     return "Language Updated Successfully.";
   } catch (error: any) {
