@@ -128,12 +128,20 @@ export async function getAllUsersByUsername(searchParam: String) {
 export async function updateLanguage(userId: String, language: String) {
   try {
     connectToDB();
-    const user = await User.findByIdAndUpdate(
-      userId,
-      {
-        language,
-      }
-    );
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return "No User Found.";
+    }
+
+    if (user.language === language) {
+      return "Choose different language from the previous one.";
+    }
+
+    const updatedUserLanguage = await User.findByIdAndUpdate(userId, {
+      language,
+    });
 
     if (!user) {
       return "No User found!";
