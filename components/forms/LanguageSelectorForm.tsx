@@ -45,7 +45,7 @@ const LanguageSelectorForm = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
-      title: 'Language Updated!',
+      title: "Language Updated!",
       description: `Your language has been updated to ${data.language}`,
     });
     console.log(data.selector);
@@ -54,8 +54,6 @@ const LanguageSelectorForm = () => {
 
     //provide the language to the user
     //update the user's language in the database
-    
-
   }
 
   return (
@@ -76,9 +74,9 @@ const LanguageSelectorForm = () => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Languages</SelectLabel>
-                    {languages.map(({ language, id }) => (
-                      <SelectItem key={id} value={`${language}`}>
-                        {language}
+                    {languages.map(({ key, id, value }) => (
+                      <SelectItem key={id} value={`${value}`}>
+                        {key}
                       </SelectItem>
                     ))}
                   </SelectGroup>

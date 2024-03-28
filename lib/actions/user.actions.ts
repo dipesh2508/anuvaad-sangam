@@ -3,6 +3,7 @@
 import { connectToDB } from "@/lib/mongoose";
 import { User } from "@/lib/models/user.model";
 import { revalidatePath } from "next/cache";
+import { languages } from "../constants/language";
 
 export async function fetchUser(userId: string) {
   try {

@@ -113,7 +113,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       image: values.profile_photo,
       path: pathname,
       email: user.email,
-      language: values.language
+      language: values.language,
     });
 
     if (pathname === "/profile/edit") {
@@ -236,9 +236,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Languages</SelectLabel>
-                    {languages.map(({ language, id }) => (
-                      <SelectItem key={id} value={language}>
-                        {language}
+                    {languages.map(({ key, id, value }) => (
+                      <SelectItem key={id} value={value}>
+                        {key}
                       </SelectItem>
                     ))}
                   </SelectGroup>

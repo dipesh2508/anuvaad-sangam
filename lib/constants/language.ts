@@ -1,33 +1,33 @@
-interface Lanugage {
-    id: number;
-    language: string;
-    selector: string;
+interface Language {
+  id: number;
+  key: string;
+  value: string;
 }
 
-export const languages: Lanugage[] = [
+export const languages: Language[] = [
     {
         id: 1,
-        language: "English",
-        selector: 'en'
+        key: "English",
+        value: 'en'
     },
     {
         id: 2,
-        language: "Hindi",
-        selector: 'hi'
+        key: "Hindi",
+        value: 'hi'
     },
     {
         id: 3,
-        language: "Spanish",
-        selector: 'es'
+        key: "Spanish",
+        value: 'es'
     },
     {
         id: 4,
-        language: "French",
-        selector: 'fr'
+        key: "French",
+        value: 'fr'
     },
     {
         id: 5,
-        language: "German",
-        selector: 'de'
+        key: "German",
+        value: 'de'
     }
 ]
