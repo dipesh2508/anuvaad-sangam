@@ -101,7 +101,7 @@ export async function findRandomUsers(userId: string) {
       {
         $match: {
           $not: {
-            _id: userId,
+            id: userId,
           },
         },
       },
@@ -109,6 +109,12 @@ export async function findRandomUsers(userId: string) {
         $limit: 10,
       },
     ]);
+
+    if (!users) {
+      return "No user found.";
+    }
+
+    return users;
   } catch (error: any) {
     throw new Error(`Failed to fetch random users.\nERROR:${error.message}`);
   }
@@ -127,12 +133,7 @@ export async function getAllUsersByUsername(searchParam: string) {
       },
       {
         $limit: 10,
-      },
-      {
-        $project: {
-          result: 1,
-        },
-      },
+      }
     ]);
 
     if (!searchedUsers) {
@@ -172,15 +173,7 @@ export async function updateLanguage({ userId, language }: IUpdateLanguage) {
     await user.save();
 
     revalidatePath("/language");
-
-    // const updatedUserLanguage = await User.findByIdAndUpdate(userId, {
-    //   language,
-    // });
-
-    // if (!user) {
-    //   return "No User found!";
-    // }
-
+    
     return "Language Updated Successfully.";
   } catch (error: any) {
     throw new Error(`Failed to Update language.\nERROR:${error.message}`);
