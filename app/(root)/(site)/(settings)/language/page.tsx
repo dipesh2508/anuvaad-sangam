@@ -4,12 +4,26 @@ import flag from "@/assets/flags/India.svg";
 import Language from '@/assets/images/Language.png'
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { fetchUser } from "@/lib/actions/user.actions";
+import { languages } from "@/lib/constants/language";
 
 const Page = async () => {
 
   const user = await currentUser();
   if(!user){
     redirect("/sign-in");
+  }
+
+  const userData = await fetchUser(user.id);
+
+  if (!userData) {
+    redirect("/onboarding");
+  }
+
+  const language = languages.find((lang) => lang.value === userData.language);
+
+  if(!language){
+    redirect("/onboarding");
   }
 
   return (
@@ -20,7 +34,7 @@ const Page = async () => {
           Your Current Language is:
           <div className="mt-2 flex flex-row  items-center gap-4">
             <Image src={flag} alt="flag" width={50} height={50} />
-            <span>Hindi</span>
+            <span>{language.key}</span>
           </div>
         </div>
         <div className="mt-16">

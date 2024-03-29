@@ -251,9 +251,11 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
             </FormItem>
           )}
         />
-        <Button type="submit" variant="outline">
+        <div>
+        <Button type="submit" variant="default">
           Submit
         </Button>
+        </div>
       </form>
     </Form>
   );

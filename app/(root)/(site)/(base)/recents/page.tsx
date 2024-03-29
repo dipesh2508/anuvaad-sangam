@@ -1,4 +1,3 @@
-"use client";
 import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -7,12 +6,21 @@ import Image from "next/image";
 import avatar from "@/assets/test/avatar.svg";
 import { ChatData } from "@/lib/example/chat";
 import Recents from "@/components/cards/Recents";
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { fetchUser } from "@/lib/actions/user.actions";
 
-const Page = () => {
-  const router = useRouter();
-  const pathname = usePathname();
+const Page = async () => {
+  const user = await currentUser();
+  if(!user){
+    redirect("/sign-in");
+  }
 
-  const { userId } = useAuth();
+  const userData = await fetchUser(user.id);
+
+  if (!userData) {
+    redirect("/onboarding");
+  }
   return (
     <div className="grid h-[90vh] w-full grid-cols-12">
       <div className="col-span-9">

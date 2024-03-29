@@ -7,7 +7,21 @@ import { MdCall } from "react-icons/md";
 import { MdOutlineEmail } from "react-icons/md";
 import { SiInstagram } from "react-icons/si";
 
-const Page = () => {
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { fetchUser } from "@/lib/actions/user.actions";
+
+const Page = async () => {
+  const user = await currentUser();
+  if(!user){
+    redirect("/sign-in");
+  }
+
+  const userData = await fetchUser(user.id);
+
+  if (!userData) {
+    redirect("/onboarding");
+  }
   return (
     <div className="flex w-max">
       <div className="  py-8 pl-16 pr-36 ">
