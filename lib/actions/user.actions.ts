@@ -93,16 +93,35 @@ export async function addFriendByUsername({
   }
 }
 
-export async function getAllUsersByUsername(searchParam: String) {
+export async function findRandomUsers(userId: string) {
+  try {
+    connectToDB();
+
+    const users = await User.aggregate([
+      {
+        $match: {
+          $not: {
+            _id: userId,
+          },
+        },
+      },
+      {
+        $limit: 10,
+      },
+    ]);
+  } catch (error: any) {
+    throw new Error(`Failed to fetch random users.\nERROR:${error.message}`);
+  }
+}
+
+export async function getAllUsersByUsername(searchParam: string) {
   try {
     const searchedUsers = await User.aggregate([
       {
-        $addFields: {
-          Users: {
-            $regexFindAll: {
-              input: "$username",
-              regex: `^${searchParam}`,
-            },
+        $match: {
+          username: {
+            $regex: `^${searchParam}$`,
+            $options: "i",
           },
         },
       },
