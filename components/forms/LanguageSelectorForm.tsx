@@ -27,30 +27,44 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-import { languages } from "@/lib/constants/language";
+import { languages, Language } from "@/lib/constants/language";
+import { updateLanguage } from "@/lib/actions/user.actions";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
-  language: z.string({
-    required_error: "Please select a language",
-  }),
-  selector: z.string({
+  languages: z.string({
     required_error: "Please select a language",
   }),
 });
 
-const LanguageSelectorForm = () => {
+const LanguageSelectorForm = ({
+  id,
+}:{
+  id: string;
+}) => {
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    await updateLanguage({userId:id, language: values.languages});
+
+    //map language value to key
+    const language = languages.find((lang) => lang.value === values.languages);
+
+    if (!language) {
+    throw new Error('Language not found');
+    }
     toast({
       title: "Language Updated!",
-      description: `Your language has been updated to ${data.language}`,
+      description: `Your language has been updated to ${language?.key}`,
     });
-    console.log(data.selector);
     //reset the form
     form.reset();
+    router.push("/recents");
 
     //provide the language to the user
     //update the user's language in the database
@@ -61,7 +75,7 @@ const LanguageSelectorForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
         <FormField
           control={form.control}
-          name="language"
+          name="languages"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Language</FormLabel>

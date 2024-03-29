@@ -126,11 +126,19 @@ export async function getAllUsersByUsername(searchParam: String) {
   }
 }
 
-export async function updateLanguage(userId: String, language: String) {
+interface IUpdateLanguage {
+  userId: string;
+  language: string;
+}
+
+export async function updateLanguage({ userId, language }: IUpdateLanguage) {
   try {
     connectToDB();
 
-    const user = await User.findById(userId);
+    const user = await User.findOneAndUpdate(
+      { id: userId },
+      { language: language },
+    );
 
     if (!user) {
       return "No User Found.";
@@ -143,6 +151,8 @@ export async function updateLanguage(userId: String, language: String) {
     user.language = language;
 
     await user.save();
+
+    revalidatePath("/language");
 
     // const updatedUserLanguage = await User.findByIdAndUpdate(userId, {
     //   language,

@@ -2,8 +2,16 @@ import LanguageSelectorForm from "@/components/forms/LanguageSelectorForm";
 import Image from "next/image";
 import flag from "@/assets/flags/India.svg";
 import Language from '@/assets/images/Language.png'
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
-const Page = () => {
+const Page = async () => {
+
+  const user = await currentUser();
+  if(!user){
+    redirect("/sign-in");
+  }
+
   return (
     <section className="flex flex-row px-12 py-16 gap-48">
       <div className=" col-span-1">
@@ -16,7 +24,7 @@ const Page = () => {
           </div>
         </div>
         <div className="mt-16">
-          <LanguageSelectorForm />
+          <LanguageSelectorForm id={user.id} />
         </div>
       </div>
       <div className="w-[700px] pt-12">

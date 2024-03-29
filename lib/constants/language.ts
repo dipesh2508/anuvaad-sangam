@@ -1,4 +1,4 @@
-interface Language {
+export interface Language {
   id: number;
   key: string;
   value: string;
