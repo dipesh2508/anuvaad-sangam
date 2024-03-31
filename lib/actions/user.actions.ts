@@ -70,9 +70,9 @@ export async function fetchContacts(userId: string) {
     if (!user) {
       throw new Error(`No user found.`);
     }
-
+    const contact = await User.find({ _id: { $in: user.contacts } });
     //return array of objects of all contacts of the user
-    return await User.find({ _id: { $in: user.contacts } });
+    return contact;
   }
   catch (error: any) {
     throw new Error(`Failed to fetch contacts.\nERROR:${error.message}`);

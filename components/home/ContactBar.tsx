@@ -1,5 +1,20 @@
+"use client"
+import { fetchContacts } from "@/lib/actions/user.actions";
 import Image from "next/image";
-const ContactBar = ({ image, id, contact }: { image: string; id: string, contact: string[] }) => {
+import { useEffect, useState } from "react";
+import ContactCard from '@/components/cards/ContactCard'
+
+const ContactBar = ({ image, id }: { image: string; id: string }) => {
+    const [contacts, setContacts] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const users = await fetchContacts(id);
+            setContacts(users);
+        };
+
+        fetchData();
+    }, [id]);
   return (
     <>
       <div className="mt-6 flex h-36 w-36 flex-col content-center justify-center gap-4">
@@ -17,7 +32,21 @@ const ContactBar = ({ image, id, contact }: { image: string; id: string, contact
         <h3 className=" font-primary text-lg font-medium">Your Contacts</h3>
         <div className=" mt-2 flex flex-col gap-2" />
         <div className="mt-4 flex h-auto w-full gap-4">
-            
+            {contacts.map((contact) => {
+                return (
+                    <div key={contact.id} className="flex gap-4">
+                        <ContactCard
+                            image={contact.image}
+                            name={contact.name}
+                            bio={contact.bio}
+                            username={contact.username}
+                            id={id}
+                        />
+                    </div>
+                );
+
+            }
+            )}
         </div>
       </div>
     </>

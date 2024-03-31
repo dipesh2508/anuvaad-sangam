@@ -23,7 +23,7 @@ const Page = async () => {
         <Chat />
       </div>
       <div className="col-span-3 h-[90vh] overflow-scroll overflow-x-hidden flex flex-col items-center border-l border-l-primary-3 pb-8">
-        <ContactBar image={userData.image} id={userData._id} contact={userData.contacts} />
+        <ContactBar image={userData.image} id={userData._id} />
     </div>
   </div>
 
