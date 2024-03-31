@@ -28,7 +28,7 @@ const Page = async () => {
       </div>
       <div className="col-span-3 h-[90vh] overflow-scroll overflow-x-hidden flex flex-col items-center border-l border-l-primary-3 pb-8">
         <div className="mt-6 flex h-36 w-36 flex-col content-center justify-center gap-4">
-          <Image src={avatar} alt="avatar" height={100} className="mx-auto" />
+          <Image src={userData.image} alt="avatar" height={120} width={120} className="mx-auto rounded-full" />
           <h2 className="text-center text-xl font-medium">Dipesh Ranjan</h2>
         </div>
         <div className=" mt-4 h-[1px] w-10/12 bg-primary-3"></div>

@@ -9,7 +9,6 @@ export default function RootLayout({
     <div className="flex flex-row">
         <SettingSideBar />
         {children}
-
     </div>
   );
 }
