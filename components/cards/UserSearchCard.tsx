@@ -31,7 +31,7 @@ const UserSearchCard = ({
     const pathname = usePathname();
 
   return (
-    <Card className="">
+    <Card className="w-full">
       <CardHeader className="overflow-hidden px-2 py-3">
         <div className="grid grid-cols-6 items-center gap-2">
           <Image

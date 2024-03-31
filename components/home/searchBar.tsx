@@ -19,6 +19,7 @@ import { getAllUsersByUsername } from "@/lib/actions/user.actions";
 import { SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import UserSearchCard from "@/components/cards/UserSearchCard";
+import RandomUsers from "../shared/RandomUsers";
 
 const SearchBar = ({ image,id }: { image: string, id: string }) => {
   const [users, setUsers] = useState<any[]>([]);
@@ -102,6 +103,7 @@ const SearchBar = ({ image,id }: { image: string, id: string }) => {
           ))}
         </div>
       </div>
+      <RandomUsers id={id} />
     </>
   );
 };

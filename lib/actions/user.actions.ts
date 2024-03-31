@@ -61,6 +61,25 @@ export async function updateUser({
   }
 }
 
+export async function fetchContacts(userId: string) {
+  try {
+    connectToDB();
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error(`No user found.`);
+    }
+
+    //return array of objects of all contacts of the user
+    return await User.find({ _id: { $in: user.contacts } });
+  }
+  catch (error: any) {
+    throw new Error(`Failed to fetch contacts.\nERROR:${error.message}`);
+    return [];
+  }
+}
+
 interface IUser {
   username: string;
   id: string;
@@ -104,26 +123,17 @@ export async function findRandomUsers(userId: string) {
   try {
     connectToDB();
 
-    const users = await User.aggregate([
-      {
-        $match: {
-          $not: {
-            id: userId,
-          },
-        },
-      },
-      {
-        $limit: 10,
-      },
-    ]);
+    const users = await User.find({ _id: { $ne: userId } });
 
     if (!users) {
-      return "No user found.";
+      console.error("No user found.");
     }
 
     return users;
+    
   } catch (error: any) {
     throw new Error(`Failed to fetch random users.\nERROR:${error.message}`);
+    return [];
   }
 }
 
