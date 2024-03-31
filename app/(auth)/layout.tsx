@@ -13,7 +13,7 @@ export const metadata = {
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;

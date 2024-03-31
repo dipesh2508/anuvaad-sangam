@@ -64,11 +64,13 @@ export async function updateUser({
 interface IUser {
   username: string;
   id: string;
+  pathname: string;
 }
 
 export async function addFriendByUsername({
   username,
   id,
+  pathname,
 }: IUser): Promise<void> {
   try {
     connectToDB();
@@ -88,6 +90,11 @@ export async function addFriendByUsername({
     OtherUser.contacts.push(user._id);
 
     await user.contacts.push(OtherUser._id);
+
+    await user.save();
+    await OtherUser.save();
+
+    revalidatePath(pathname);
   } catch (error: any) {
     throw new Error(`Failed to add user.\nERROR:${error.message}`);
   }

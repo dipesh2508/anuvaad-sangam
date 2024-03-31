@@ -20,7 +20,7 @@ import { SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import UserSearchCard from "@/components/cards/UserSearchCard";
 
-const SearchBar = ({ image }: { image: string }) => {
+const SearchBar = ({ image,id }: { image: string, id: string }) => {
   const [users, setUsers] = useState<any[]>([]);
 
   const form = useForm<z.infer<typeof SearchFormSchema>>({
@@ -95,6 +95,8 @@ const SearchBar = ({ image }: { image: string }) => {
                 name={user.name}
                 bio={user.bio}
                 username={user.username}
+                contacts={user.contacts}
+                id={id}
               />
             </div>
           ))}
