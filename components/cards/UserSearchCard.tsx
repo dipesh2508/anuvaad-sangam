@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import {
   Card,
@@ -10,7 +11,8 @@ import {
 import { Button } from "../ui/button";
 import { MessageCirclePlus, MessageCircleX } from "lucide-react";
 import { addFriendByUsername, removeFriend } from "@/lib/actions/user.actions";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const UserSearchCard = ({
   image,
@@ -32,6 +34,11 @@ const UserSearchCard = ({
 
     const pathname = usePathname();
     console.log(id);
+
+    useEffect(()=>{
+      console.log(pathname);
+    
+    }, [pathname]);
 
   return (
     <Card className="w-full">
@@ -63,8 +70,7 @@ const UserSearchCard = ({
           {contacts.includes(id) && (
             <div className="">
               <Button size={"sm"} variant={"warning"} onClick={async ()=> {
-                await removeFriend(id, userId);
-                console.log(userId);
+                await removeFriend(id, userId, pathname);
               }}>
                 <MessageCircleX size={16} />
               </Button>

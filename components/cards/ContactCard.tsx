@@ -8,9 +8,13 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
-import { MessageCirclePlus, MessageCircleReply } from "lucide-react";
+import { MessageCirclePlus, MessageCircleReply, Router } from "lucide-react";
 import { addFriendByUsername } from "@/lib/actions/user.actions";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { MessageCircle } from "lucide-react";
+import { findChat } from "@/lib/actions/chat.actions";
+import { useRouter } from "next/navigation";
+
 
 const ContactCard = ({
   image,
@@ -18,14 +22,21 @@ const ContactCard = ({
   bio,
   username,
   id,
+  userId
 }: {
   image: string;
   name: string;
   bio: string;
   username: string;
   id: string;
+  userId: string;
 }) => {
   const pathname = usePathname();
+  const router = useRouter();
+  async function onClick () {
+    const link = await findChat(id, userId);
+    router.push(`/conversations/${link}`);
+  }
 
   return (
     <Card className="w-full">
@@ -45,7 +56,11 @@ const ContactCard = ({
             </CardTitle>
             <CardDescription className="text-sm">{bio}</CardDescription>
           </div>
-          
+          <div>
+          <Button size={"sm"} onClick={onClick}>
+                <MessageCircle size={16} />
+              </Button>
+          </div>
         </div>
       </CardHeader>
     </Card>

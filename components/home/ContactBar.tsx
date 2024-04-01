@@ -41,6 +41,7 @@ const ContactBar = ({ image, id }: { image: string; id: string }) => {
                             bio={contact.bio}
                             username={contact.username}
                             id={id}
+                            userId={contact._id}
                         />
                     </div>
                 );
