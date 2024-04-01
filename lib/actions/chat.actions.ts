@@ -25,9 +25,9 @@ export async function findChat(curUserId: string, partnerUserId: string) {
     connectToDB();
 
     const existingChats = await Chat.findOne({
-      $and: [
-        { $or: [{ user1: curUserId }, { user2: partnerUserId }] },
-        { $or: [{ user1: partnerUserId }, { user2: curUserId }] },
+      $or: [
+        { user1: curUserId, user2: partnerUserId },
+        { user1: partnerUserId, user2: curUserId },
       ],
     });
 
