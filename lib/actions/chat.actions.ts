@@ -39,6 +39,15 @@ export async function findChat(curUserId: string, partnerUserId: string) {
         user2: partnerUserId,
       });
 
+      const curUser = await User.findById(curUserId);
+      const partnerUser = await User.findById(partnerUserId);
+
+      curUser.chats.push(newChat._id);
+      partnerUser.chats.push(newChat._id);
+
+      await curUser.save();
+      await partnerUser.save();
+
       await newChat.save();
       return newChat._id;
     }
