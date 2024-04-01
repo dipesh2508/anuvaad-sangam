@@ -179,7 +179,7 @@ export async function removeFriend(curUserId: string, unFriendUserId: string) {
       curUserId,
       {
         contacts: {
-          $pull: unFriendUserId,
+          $pull: new mongoose.Types.ObjectId(unFriendUserId),
         },
       },
       {
@@ -191,7 +191,7 @@ export async function removeFriend(curUserId: string, unFriendUserId: string) {
       unFriendUserId,
       {
         contacts: {
-          $pull: curUserId,
+          $pull: new mongoose.Types.ObjectId(unFriendUserId),
         },
       },
       {
