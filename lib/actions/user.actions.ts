@@ -178,8 +178,8 @@ export async function removeFriend(curUserId: string, unFriendUserId: string) {
     const curUser = await User.findByIdAndUpdate(
       curUserId,
       {
-        contacts: {
-          $pull: new mongoose.Types.ObjectId(unFriendUserId),
+        $pull: {
+          contacts: unFriendUserId,
         },
       },
       {
@@ -190,8 +190,8 @@ export async function removeFriend(curUserId: string, unFriendUserId: string) {
     const unFriendUser = await User.findByIdAndUpdate(
       unFriendUserId,
       {
-        contacts: {
-          $pull: new mongoose.Types.ObjectId(unFriendUserId),
+        $pull: {
+          contacts: curUserId,
         },
       },
       {
