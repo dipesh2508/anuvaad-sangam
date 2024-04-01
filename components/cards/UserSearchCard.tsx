@@ -13,6 +13,7 @@ import { MessageCirclePlus, MessageCircleX } from "lucide-react";
 import { addFriendByUsername, removeFriend } from "@/lib/actions/user.actions";
 import { redirect, usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const UserSearchCard = ({
   image,
@@ -34,6 +35,8 @@ const UserSearchCard = ({
 
     const pathname = usePathname();
     console.log(id);
+
+    const router = useRouter();
 
     useEffect(()=>{
       console.log(pathname);
@@ -62,6 +65,7 @@ const UserSearchCard = ({
             <div className="">
               <Button size={"sm"} onClick={async () => {
               await addFriendByUsername({username, id, pathname});
+              router.refresh();
             }}>
                 <MessageCirclePlus size={16} />
               </Button>
@@ -71,6 +75,7 @@ const UserSearchCard = ({
             <div className="">
               <Button size={"sm"} variant={"warning"} onClick={async ()=> {
                 await removeFriend(id, userId, pathname);
+                router.refresh();
               }}>
                 <MessageCircleX size={16} />
               </Button>
