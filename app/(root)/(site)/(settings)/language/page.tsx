@@ -20,7 +20,7 @@ const Page = async () => {
     redirect("/onboarding");
   }
 
-  const language = languages.find((lang) => lang.value === userData.language);
+  const language:any = languages.find((lang) => lang.value === userData.language);
 
   if(!language){
     redirect("/onboarding");

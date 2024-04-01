@@ -8,8 +8,8 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
-import { MessageCirclePlus, MessageCircleReply } from "lucide-react";
-import { addFriendByUsername } from "@/lib/actions/user.actions";
+import { MessageCirclePlus, MessageCircleX } from "lucide-react";
+import { addFriendByUsername, removeFriend } from "@/lib/actions/user.actions";
 import { usePathname } from "next/navigation";
 
 const UserSearchCard = ({
@@ -18,7 +18,8 @@ const UserSearchCard = ({
   bio,
   username,
   contacts,
-  id
+  id,
+  userId
 }: {
   image: string;
   name: string;
@@ -26,6 +27,7 @@ const UserSearchCard = ({
   username: string;
   contacts: string[];
   id: string;
+  userId: string;
 }) => {
 
     const pathname = usePathname();
@@ -59,8 +61,10 @@ const UserSearchCard = ({
           )}
           {contacts.includes(id) && (
             <div className="">
-              <Button size={"sm"} variant={"secondary"}>
-                <MessageCircleReply size={16} />
+              <Button size={"sm"} variant={"warning"} onClick={async ()=> {
+                await removeFriend(id, userId);
+              }}>
+                <MessageCircleX size={16} />
               </Button>
             </div>
           )}

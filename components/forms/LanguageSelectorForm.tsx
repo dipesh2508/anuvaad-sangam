@@ -28,7 +28,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { languages, Language } from "@/lib/constants/language";
-import { updateLanguage } from "@/lib/actions/user.actions";
+import { updateLanguage } from "@/lib/actions/language.actions";
 import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({

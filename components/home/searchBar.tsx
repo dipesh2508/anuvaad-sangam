@@ -33,7 +33,7 @@ const SearchBar = ({ image, id }: { image: string; id: string }) => {
 
   async function onSubmit(values: z.infer<typeof SearchFormSchema>) {
     try {
-      const fetchedUsers = await getAllUsersByUsername(values.username);
+      const fetchedUsers = await getAllUsersByUsername( id, values.username);
       console.log(fetchedUsers);
       if (Array.isArray(fetchedUsers)) {
         console.log(fetchedUsers);
@@ -97,6 +97,7 @@ const SearchBar = ({ image, id }: { image: string; id: string }) => {
                 bio={user.bio}
                 username={user.username}
                 contacts={user.contacts}
+                userId={user._id}
                 id={id}
               />
             </div>

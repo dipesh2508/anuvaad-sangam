@@ -17,6 +17,8 @@ const buttonVariants = cva(
         cta: "bg-secondary-4 border-2 border-secondary-4 text-light-1 hover:text-secondary-4 font-primary  px-6 font-primary hover:bg-transparent",
         logout:
           "bg-primary-5 text-light-1 hover:bg-transparent hover:text-primary-5 border-2 border-primary-5",
+        warning:
+        "bg-red-500 border-2 border-red-500 text-light-1 hover:text-red-500 hover:bg-transparent",
       },
       size: {
         default: "h-10 px-4 py-4",
