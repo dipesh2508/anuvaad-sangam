@@ -1,3 +1,7 @@
+import ConversationBody from "@/components/shared/ConversationBody";
+import ConversationForm from "@/components/shared/ConversationForm";
+import ConversationHeader from "@/components/shared/ConversationHeader";
+
 interface IParams {
     conversationId: string;
   }
@@ -10,7 +14,9 @@ interface IParams {
   
     return (
       <div>
-        <h1>Conversation Id: {conversationId}</h1>
+        <ConversationHeader conversationId={conversationId} />
+        <ConversationBody conversationId={conversationId} />
+        <ConversationForm conversationId={conversationId} />
       </div>
     );
   }
