@@ -1,7 +1,8 @@
 import { fetchChats } from "@/lib/actions/chat.actions";
-import { fetchUser } from "@/lib/actions/user.actions";
+import { fetchUser, fetchUserById } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import Image from 'next/image';
 
 const ConversationHeader = async ({conversationId}: {conversationId: string;}) => {
 
@@ -18,12 +19,38 @@ const ConversationHeader = async ({conversationId}: {conversationId: string;}) =
       redirect("/onboarding");
     }
 
-    const otherUser = userData._id === conversation.user1 ? conversation.user1 : conversation.user2;
+    const otherUserId = userData._id === conversation.user1 ? conversation.user1 : conversation.user2;
 
+    const otherUser = await fetchUserById(otherUserId);
     
   return (
-    <div>
-        {otherUser}
+    <div 
+      className="
+        w-full 
+        flex 
+        border-b-[1px] 
+        sm:px-4 
+        py-2 
+        px-4 
+        lg:px-6 
+        justify-between 
+        items-center 
+        shadow-lg
+        rounded-lg
+        mt-4
+        bg-light-2
+      "
+    >
+      <div className="flex items-center gap-3">
+
+        <Image src={otherUser.image} alt={otherUser.name} width={48} height={48} className="rounded-full" />
+        <div className="flex flex-col">
+          <h3 className="font-semibold text-lg">{otherUser.name}</h3>
+          <div className="text-sm font-light text-neutral-500">
+            {otherUser.bio}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

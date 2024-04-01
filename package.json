@@ -19,6 +19,7 @@
     "@uploadthing/react": "^6.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "date-fns": "^3.6.0",
     "lucide-react": "^0.320.0",
     "mongoose": "^8.2.1",
     "next": "14.1.0",
