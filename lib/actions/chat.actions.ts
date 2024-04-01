@@ -90,7 +90,7 @@ export async function fetchMessages(conversationId: string) {
   try {
     connectToDB();
 
-    const chat = await Chat.findById(conversationId);
+    const chat = await Chat.findById(conversationId).populate("messages");
 
     if (!chat) {
       console.log(`No chat with conversation id ${conversationId} found`);
