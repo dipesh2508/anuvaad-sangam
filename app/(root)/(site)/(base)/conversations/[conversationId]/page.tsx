@@ -1,3 +1,5 @@
+import ConversationHeader from "@/components/shared/ConversationHeader";
+
 interface IParams {
     conversationId: string;
   }
@@ -10,7 +12,7 @@ interface IParams {
   
     return (
       <div>
-        <h1>Conversation Id: {conversationId}</h1>
+        <ConversationHeader conversationId={conversationId} />
       </div>
     );
   }

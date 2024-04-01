@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user.actions";
 import Onboarding from "@/assets/images/Onboarding.png";
 import Image from "next/image";
+import PublicNavBar from "@/components/shared/PublicNavBar";
+import PublicFooter from "@/components/shared/PublicFooter";
 
 async function Page() {
   const user = await currentUser();
@@ -23,7 +25,9 @@ async function Page() {
     language: userInfo?.language || "",
   };
   return (
-    <main className=" mx-24 flex flex-col justify-start bg-light-4 px-10 py-20">
+    <>
+        <PublicNavBar />
+    <main className=" px-24 flex flex-col justify-start bg-light-4 py-20">
       <section className="grid grid-cols-2 gap-20">
         <div className="mt-12">
           <h1 className="text-4xl font-medium text-primary-8">
@@ -44,6 +48,8 @@ async function Page() {
         </div>
       </section>
     </main>
+    <PublicFooter />
+    </>
   );
 }
 
