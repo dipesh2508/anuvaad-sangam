@@ -1,5 +1,6 @@
 "use server";
 
+import mongoose from "mongoose";
 import { Chat } from "../models/chat.model";
 import { Message } from "../models/message.model";
 import { User } from "../models/user.model";
@@ -90,14 +91,28 @@ export async function fetchMessages(conversationId: string) {
   try {
     connectToDB();
 
-    const chat = await Chat.findById(conversationId).populate("messages");
+    const chat = await Chat.aggregate([
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(conversationId),
+        },
+      },
+      {
+        $lookup: {
+          from: "messages",
+          localField: "message",
+          foreignField: "_id",
+          as: "allMessages",
+        },
+      },
+    ]);
 
     if (!chat) {
       console.log(`No chat with conversation id ${conversationId} found`);
       return null;
     }
 
-    return chat.messages;
+    return chat;
   } catch (error: any) {
     throw new Error(`Failed to fetch messages.\nERROR:${error.message}`);
   }
