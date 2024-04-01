@@ -29,6 +29,7 @@ const RandomUsers = ({ id }: { id: string }) => {
               bio={user.bio}
               username={user.username}
               contacts={user.contacts}
+              userId={user._id}
               id={id}
             />
           </div>

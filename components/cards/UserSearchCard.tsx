@@ -27,10 +27,11 @@ const UserSearchCard = ({
   username: string;
   contacts: string[];
   id: string;
-  userId: string;
+  userId: any;
 }) => {
 
     const pathname = usePathname();
+    console.log(id);
 
   return (
     <Card className="w-full">
@@ -63,6 +64,7 @@ const UserSearchCard = ({
             <div className="">
               <Button size={"sm"} variant={"warning"} onClick={async ()=> {
                 await removeFriend(id, userId);
+                console.log(userId);
               }}>
                 <MessageCircleX size={16} />
               </Button>

@@ -89,7 +89,9 @@ const SearchBar = ({ image, id }: { image: string; id: string }) => {
           </form>
         </Form>
         <div className="mt-4 flex h-auto w-full gap-4">
-          {users.map((user) => (
+          {users.map((user) => {
+            console.log(user)
+            return (
             <div key={user.id} className="flex gap-4">
               <UserSearchCard
                 image={user.image}
@@ -97,11 +99,11 @@ const SearchBar = ({ image, id }: { image: string; id: string }) => {
                 bio={user.bio}
                 username={user.username}
                 contacts={user.contacts}
-                userId={user._id}
                 id={id}
+                userId={user._id}
               />
             </div>
-          ))}
+          )})}
         </div>
       </div>
       <RandomUsers id={id} />
