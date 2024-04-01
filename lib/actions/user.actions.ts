@@ -171,7 +171,7 @@ export async function getAllUsersByUsername(
   }
 }
 
-export async function removeFriend(curUserId: string, unFriendUserId: string) {
+export async function removeFriend(curUserId: string, unFriendUserId: string, pathname: string) {
   try {
     connectToDB();
 
@@ -201,6 +201,8 @@ export async function removeFriend(curUserId: string, unFriendUserId: string) {
 
     await curUser.save();
     await unFriendUser.save();
+
+    revalidatePath(pathname);
 
     return "Successfully remove the friend.";
   } catch (error: any) {
