@@ -3,7 +3,7 @@
 import { connectToDB } from "@/lib/mongoose";
 import { User } from "@/lib/models/user.model";
 import { revalidatePath } from "next/cache";
-import { languages } from "../constants/language";
+import mongoose from "mongoose";
 
 export async function fetchUser(userId: string) {
   try {
@@ -71,10 +71,9 @@ export async function fetchContacts(userId: string) {
       throw new Error(`No user found.`);
     }
     const contact = await User.find({ _id: { $in: user.contacts } });
-    //return array of objects of all contacts of the user
+
     return contact;
-  }
-  catch (error: any) {
+  } catch (error: any) {
     throw new Error(`Failed to fetch contacts.\nERROR:${error.message}`);
     return [];
   }
@@ -130,27 +129,36 @@ export async function findRandomUsers(userId: string) {
     }
 
     return users;
-    
   } catch (error: any) {
     throw new Error(`Failed to fetch random users.\nERROR:${error.message}`);
     return [];
   }
 }
 
-export async function getAllUsersByUsername(searchParam: string) {
+export async function getAllUsersByUsername(
+  userId: string,
+  searchParam: string,
+) {
   try {
     const searchedUsers = await User.aggregate([
       {
         $match: {
           username: {
-            $regex: `^${searchParam}$`,
+            $regex: `${searchParam}`,
             $options: "i",
           },
         },
       },
       {
+        $match: {
+          _id: {
+            $ne: new mongoose.Types.ObjectId(userId), // Replace the hard-coded ObjectId value with a valid string representation
+          },
+        },
+      },
+      {
         $limit: 10,
-      }
+      },
     ]);
 
     if (!searchedUsers) {
@@ -160,39 +168,5 @@ export async function getAllUsersByUsername(searchParam: string) {
     return searchedUsers;
   } catch (error: any) {
     throw new Error(`Failed to Search user.\nERROR:${error.message}`);
-  }
-}
-
-interface IUpdateLanguage {
-  userId: string;
-  language: string;
-}
-
-export async function updateLanguage({ userId, language }: IUpdateLanguage) {
-  try {
-    connectToDB();
-
-    const user = await User.findOneAndUpdate(
-      { id: userId },
-      { language: language },
-    );
-
-    if (!user) {
-      return "No User Found.";
-    }
-
-    if (user.language === language) {
-      return "Choose different language from the previous one.";
-    }
-
-    user.language = language;
-
-    await user.save();
-
-    revalidatePath("/language");
-    
-    return "Language Updated Successfully.";
-  } catch (error: any) {
-    throw new Error(`Failed to Update language.\nERROR:${error.message}`);
   }
 }
