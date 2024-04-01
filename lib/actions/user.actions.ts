@@ -170,3 +170,40 @@ export async function getAllUsersByUsername(
     throw new Error(`Failed to Search user.\nERROR:${error.message}`);
   }
 }
+
+export async function removeFriend(curUserId: string, unFriendUserId: string) {
+  try {
+    connectToDB();
+
+    const curUser = await User.findByIdAndUpdate(
+      curUserId,
+      {
+        contacts: {
+          $pull: unFriendUserId,
+        },
+      },
+      {
+        new: true,
+      },
+    );
+
+    const unFriendUser = await User.findByIdAndUpdate(
+      unFriendUserId,
+      {
+        contacts: {
+          $pull: curUserId,
+        },
+      },
+      {
+        new: true,
+      },
+    );
+
+    await curUser.save();
+    await unFriendUser.save();
+
+    return "Successfully remove the friend.";
+  } catch (error: any) {
+    throw new Error(`Failed to remove friend.\nERROR:${error.message}`);
+  }
+}
