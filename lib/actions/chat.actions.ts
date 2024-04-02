@@ -91,28 +91,32 @@ export async function fetchMessages(conversationId: string) {
   try {
     connectToDB();
 
-    const chat = await Chat.aggregate([
+    const chat = await Chat.findById(conversationId);
+
+    if (!chat) {
+      return null;
+    }
+
+    const messagesIds = chat.messages;
+
+    // const messages = await Message.find({ _id: { $in: messagesIds } });
+
+    const messages = await Message.aggregate([
       {
         $match: {
-          _id: new mongoose.Types.ObjectId(conversationId),
+          _id: {
+            $in: messagesIds,
+          },
         },
       },
       {
-        $lookup: {
-          from: "messages",
-          localField: "message",
-          foreignField: "_id",
-          as: "allMessages",
+        $sort: {
+          createdAt: -1,
         },
       },
     ]);
 
-    if (!chat) {
-      console.log(`No chat with conversation id ${conversationId} found`);
-      return null;
-    }
-
-    return chat;
+    return messages;
   } catch (error: any) {
     throw new Error(`Failed to fetch messages.\nERROR:${error.message}`);
   }
