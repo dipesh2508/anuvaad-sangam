@@ -12,7 +12,7 @@ const ConversationBody = async ({conversationId}:{
         return <div>no message</div>
     }
 
-    const revMessages = messages.reverse()
+    // const revMessages = messages.reverse()
 
     // const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -21,7 +21,7 @@ const ConversationBody = async ({conversationId}:{
         <div 
         // ref={bottomRef}
          className="pt-24">
-          {revMessages.map((message, i) => (
+          {messages.map((message, i) => (
             <MessageBox
               isLast={i === messages.length - 1}
               key={message.id}

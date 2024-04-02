@@ -19,7 +19,9 @@ const ConversationHeader = async ({conversationId}: {conversationId: string;}) =
       redirect("/onboarding");
     }
 
-    const otherUserId = userData._id === conversation.user1 ? conversation.user1 : conversation.user2;
+    const otherUserId = userData._id.toString() === conversation.user1.toString() ? conversation.user2 : conversation.user1;
+
+    // console.log(otherUserId)
 
     const otherUser = await fetchUserById(otherUserId);
     

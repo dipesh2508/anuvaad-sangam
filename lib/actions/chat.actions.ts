@@ -111,7 +111,7 @@ export async function fetchMessages(conversationId: string) {
       },
       {
         $sort: {
-          createdAt: -1,
+          createdAt: 1,
         },
       },
     ]);
