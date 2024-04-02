@@ -1,8 +1,11 @@
 import { type NextRequest } from "next/server";
 const { Translate } = require("@google-cloud/translate").v2;
 
+
+const projectId = "lang-chat-412018";
+
 const translate = new Translate({
-  key: process.env.GOOGLE_API_KEY,
+  projectId
 });
 
 export async function POST(req: NextRequest) {
