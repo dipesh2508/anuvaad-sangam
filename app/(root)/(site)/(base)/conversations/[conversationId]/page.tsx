@@ -1,5 +1,5 @@
 import ConversationBody from "@/components/shared/ConversationBody";
-import ConversationForm from "@/components/shared/ConversationForm";
+import ConversationForm from "@/components/forms/ConversationForm";
 import ConversationHeader from "@/components/shared/ConversationHeader";
 
 interface IParams {
