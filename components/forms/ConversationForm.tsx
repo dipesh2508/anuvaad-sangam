@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { HiPaperAirplane } from "react-icons/hi2";
 import { Button } from "../ui/button";
 import {
@@ -15,17 +15,25 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { MessageValidation } from "@/lib/validations/message";
 import * as z from "zod";
 import { Input } from "../ui/input";
+import { sendMessage } from "@/lib/actions/chat.actions";
 
-const ConversationForm = ({ conversationId }: { conversationId: string }) => {
+const ConversationForm = ({
+  conversationId,
+  senderId,
+}: {
+  conversationId: string;
+  senderId: string;
+}) => {
   const form = useForm({
     resolver: zodResolver(MessageValidation),
     defaultValues: {
-        message: "",
-      },
+      message: "",
+    },
   });
 
   const onSubmitFunc = async (data: z.infer<typeof MessageValidation>) => {
-    console.log(data);
+    console.log(data.message)
+    await sendMessage(senderId, conversationId, data.message);
     form.reset();
   };
   return (
