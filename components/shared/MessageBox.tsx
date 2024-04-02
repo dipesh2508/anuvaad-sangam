@@ -3,9 +3,10 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { fetchUser } from "@/lib/actions/user.actions";
+import { fetchUser, fetchUserById } from "@/lib/actions/user.actions";
+import { fetchChats } from "@/lib/actions/chat.actions";
 
-const MessageBox = async ({ isLast, data }: { isLast: boolean; data: any }) => {
+const MessageBox = async ({ isLast, data, conversationId }: { isLast: boolean; data: any; conversationId:string }) => {
 
   const user = await currentUser();
   if(!user){
@@ -18,8 +19,24 @@ const MessageBox = async ({ isLast, data }: { isLast: boolean; data: any }) => {
     redirect("/onboarding");
   }
 
+  const chat = await fetchChats(conversationId);
 
-  const isOwn = true;
+  if (!chat) {
+    return null;
+  }
+
+  const user1 = chat.user1;
+  const user2 = chat.user2;
+
+  const otherUserId = userData._id.toString() === user1.toString() ? user2 : user1;
+
+  const isOwn = otherUserId.toString() === data.senderId.toString() ? false: true;
+
+  const otherUser = await fetchUserById(otherUserId);
+
+  const imageData = isOwn ? userData.image : otherUser.image;
+
+  // const isOwn = true;
   
   const container = clsx("flex gap-3 p-4", isOwn && "justify-end");
   const avatar = clsx(isOwn && "order-2");
@@ -34,7 +51,7 @@ const MessageBox = async ({ isLast, data }: { isLast: boolean; data: any }) => {
   return (
     <div className={container}>
       <div className={avatar}>
-        <Image src={userData.image} width={36} height={36} className="rounded-full" alt={userData.name} />
+        <Image src={imageData} width={36} height={36} className="rounded-full" alt={userData.name} />
       </div>
       <div className={body}>
         <div className="flex items-center gap-1">

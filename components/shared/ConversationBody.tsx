@@ -26,6 +26,7 @@ const ConversationBody = async ({conversationId}:{
               isLast={i === messages.length - 1}
               key={message.id}
               data={message}
+              conversationId={conversationId}
             />
           ))}
         </div>
