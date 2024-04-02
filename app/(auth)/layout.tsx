@@ -19,6 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
 
+  //   const user = await currentUser();
+  // if(user){
+  //   redirect("/recents");
+  // }
+
   return (
     <ClerkProvider>
       <html lang="en">

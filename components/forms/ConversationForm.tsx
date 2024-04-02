@@ -16,6 +16,9 @@ import { MessageValidation } from "@/lib/validations/message";
 import * as z from "zod";
 import { Input } from "../ui/input";
 import { sendMessage } from "@/lib/actions/chat.actions";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { useState } from "react";
 
 const ConversationForm = ({
   conversationId,
@@ -24,6 +27,8 @@ const ConversationForm = ({
   conversationId: string;
   senderId: string;
 }) => {
+
+  const [message, setMessage] = useState<string>("");
   const form = useForm({
     resolver: zodResolver(MessageValidation),
     defaultValues: {
@@ -31,10 +36,18 @@ const ConversationForm = ({
     },
   });
 
+  const router = useRouter();
+
   const onSubmitFunc = async (data: z.infer<typeof MessageValidation>) => {
-    console.log(data.message)
-    await sendMessage(senderId, conversationId, data.message);
+    
+    const text = data.message;
+    
+    axios.post(`http://localhost:8000/translate?text=${text}&target=hi`).then(async (response:any) => {
+      await sendMessage(senderId, conversationId, response.data.data);
+    });
+
     form.reset();
+    router.refresh();
   };
   return (
     <div
