@@ -31,7 +31,7 @@ const ContactBar = ({ image, id }: { image: string; id: string }) => {
       <div className="mt-4 w-full px-7">
         <h3 className=" font-primary text-lg font-medium">Your Contacts</h3>
         <div className=" mt-2 flex flex-col gap-2" />
-        <div className="mt-4 flex h-auto w-full gap-4">
+        <div className="mt-4 flex flex-col h-auto w-full gap-4">
             {contacts.map((contact) => {
                 return (
                     <div key={contact.id} className="flex gap-4">
