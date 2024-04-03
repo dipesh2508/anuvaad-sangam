@@ -88,7 +88,7 @@ const SearchBar = ({ image, id }: { image: string; id: string }) => {
             </Button>
           </form>
         </Form>
-        <div className="mt-4 flex h-auto w-full gap-4">
+        <div className="mt-4 flex flex-col h-auto w-full gap-4">
           {users.map((user) => {
             console.log(user)
             return (

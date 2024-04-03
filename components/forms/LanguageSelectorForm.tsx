@@ -64,7 +64,7 @@ const LanguageSelectorForm = ({
     });
     //reset the form
     form.reset();
-    router.push("/recents");
+    router.refresh();
 
     //provide the language to the user
     //update the user's language in the database

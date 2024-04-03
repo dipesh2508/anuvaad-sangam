@@ -33,7 +33,7 @@ const Page = async () => {
         <div className="mt-16">
           Your Current Language is:
           <div className="mt-2 flex flex-row  items-center gap-4">
-            <Image src={flag} alt="flag" width={50} height={50} />
+            <Image src={language.image} alt="flag" width={50} height={50} />
             <span>{language.key}</span>
           </div>
         </div>
