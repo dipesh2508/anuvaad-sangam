@@ -75,35 +75,35 @@ export async function sendMessage(
       language2: "en",
     });
 
-    const chat = await Chat.findById(conversationId);
+    const chat = await Chat.findById(conversationId); //old
 
     if(!chat){
       return null;
     }
 
-    const user1 = chat.user1;
-    const user2 = chat.user2;
+    const user1Id = chat.user1;
+    const user2Id = chat.user2;
 
-    if(!user1 || !user2){
-      return null;
-    }
+    const receiverId = senderId.toString() === user1Id.toString() ? user2Id : user1Id;
+    console.log(receiverId)
 
-    const receiver = senderId.toString() === user1.toString() ? user2 : user1;
-    console.log(receiver)
+    const sender = await User.findById(senderId);
+    const receiver = await User.findById(receiverId);
 
-    const user = await User.findById(senderId);
+    await sender.recentChats.push(receiverId);
+    await receiver.recentChats.push(senderId);
+    console.log("before message saving")
 
-    if(!user){
-      return null;
-    }
+    chat.messages.push(message); //old
 
-    user.recentChats.push(receiver);
-
-    chat.messages.push(message);
+    console.log("after message saving")
     
-    await chat.save();
+    await chat.save(); //old
 
-    await user.save();
+    console.log("after chat saving")
+
+    await sender.save();
+    await receiver.save();
 
     return chat.messages; //Todo
   } catch (error: any) {
