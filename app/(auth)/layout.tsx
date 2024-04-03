@@ -4,7 +4,7 @@ import { Montserrat } from "next/font/google";
 import PublicNavBar from "@/components/shared/PublicNavBar";
 import PublicFooter from "@/components/shared/PublicFooter";
 import { redirect } from "next/navigation";
-
+import { auth } from "@clerk/nextjs";
 
 export const metadata = {
   title: "Anuvaad Sangam",
@@ -23,6 +23,12 @@ export default function RootLayout({
   // if(user){
   //   redirect("/recents");
   // }
+
+  const { userId } = auth();
+
+  if(userId){
+    redirect("/recents")
+  }
 
   return (
     <ClerkProvider>

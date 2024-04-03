@@ -1,4 +1,3 @@
-
 import { useRef } from "react";
 import MessageBox from "./MessageBox";
 import { fetchMessages } from "@/lib/actions/chat.actions";
