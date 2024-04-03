@@ -87,8 +87,10 @@ export async function sendMessage(
     user.recentChats.push(receiver);
 
     chat.messages.push(message);
-
+    
     await chat.save();
+
+    await user.save();
 
     return chat.messages; //Todo
   } catch (error: any) {
