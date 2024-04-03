@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {IChat} from '@/lib/models/chat.model'
+import { IChat } from "@/lib/models/chat.model";
 export interface IUser {
   id: string;
   name: string;
@@ -11,6 +11,7 @@ export interface IUser {
   contacts: string[];
   language: string;
   onboarded: boolean;
+  recentChats: string[];
 }
 
 const userSchema = new mongoose.Schema<IUser>(
@@ -57,10 +58,20 @@ const userSchema = new mongoose.Schema<IUser>(
       default: "en",
     },
     onboarded: Boolean,
+    recentChats: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     timestamps: true,
   },
 );
+
+userSchema.virtual("getRecentChats", function (this: IUser) {
+  return this.recentChats.slice(-5);
+});
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
