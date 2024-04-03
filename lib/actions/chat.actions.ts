@@ -77,33 +77,9 @@ export async function sendMessage(
 
     const chat = await Chat.findById(conversationId); //old
 
-    if(!chat){
-      return null;
-    }
-
-    const user1Id = chat.user1;
-    const user2Id = chat.user2;
-
-    const receiverId = senderId.toString() === user1Id.toString() ? user2Id : user1Id;
-    console.log(receiverId)
-
-    const sender = await User.findById(senderId);
-    const receiver = await User.findById(receiverId);
-
-    await sender.recentChats.push(receiverId);
-    await receiver.recentChats.push(senderId);
-    console.log("before message saving")
-
     chat.messages.push(message); //old
 
-    console.log("after message saving")
-    
     await chat.save(); //old
-
-    console.log("after chat saving")
-
-    await sender.save();
-    await receiver.save();
 
     return chat.messages; //Todo
   } catch (error: any) {
