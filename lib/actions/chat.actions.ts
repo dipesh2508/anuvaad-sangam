@@ -77,12 +77,25 @@ export async function sendMessage(
 
     const chat = await Chat.findById(conversationId);
 
+    if(!chat){
+      return null;
+    }
+
     const user1 = chat.user1;
     const user2 = chat.user2;
 
-    const receiver = senderId === user1 ? user2 : user1;
+    if(!user1 || !user2){
+      return null;
+    }
+
+    const receiver = senderId.toString() === user1.toString() ? user2 : user1;
+    console.log(receiver)
 
     const user = await User.findById(senderId);
+
+    if(!user){
+      return null;
+    }
 
     user.recentChats.push(receiver);
 
