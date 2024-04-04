@@ -1,7 +1,8 @@
-import mongoose from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 import { IUser } from "./user.model";
 import { IMessage } from "./message.model";
 export interface IChat {
+  _id: ObjectId;
   messages: IMessage[];
   user1: IUser;
   user2: IUser;

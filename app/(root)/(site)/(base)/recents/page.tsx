@@ -9,6 +9,7 @@ import Recents from "@/components/cards/Recents";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user.actions";
+import { fetchRecents } from "@/lib/actions/chat.actions";
 
 const Page = async () => {
   const user = await currentUser();
@@ -21,6 +22,15 @@ const Page = async () => {
   if (!userData) {
     redirect("/onboarding");
   }
+
+  const recentChats = await fetchRecents(userData._id);
+
+  if(!recentChats){
+    return null;
+  }
+
+
+
   return (
     <div className="grid h-[90vh] w-full grid-cols-12">
       <div className="col-span-9">
@@ -36,14 +46,14 @@ const Page = async () => {
           <h3 className=" font-primary text-lg font-medium">Last Chats</h3>
           <div className="flex flex-col gap-2 mt-2 mb-12">
 
-          {ChatData.map((chat) => (
+          {recentChats.map((chat, index) => (
             <Recents
-            key={chat.id}
-            id={chat.id}
-            name={chat.name}
-            message={chat.message}
-            time={chat.time}
-            avatar={chat.avatar}
+            key={index}
+            name={chat.partner.name}
+            message={chat.lastestMessage.body1}
+            time={chat.lastestMessage.createdAt.toLocaleTimeString().replace(/:\d+ /, ' ')}
+            avatar={chat.partner.image}
+            conversationId={chat.chat._id.toString()}
             />
             ))}
             </div>

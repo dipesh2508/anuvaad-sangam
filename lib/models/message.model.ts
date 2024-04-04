@@ -1,11 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 import { IUser } from "./user.model";
 export interface IMessage {
+  _id: ObjectId;
   body1: string;
   body2: string;
   senderId: IUser;
   language1: string;
   language2: string;
+  createdAt: Date;
 }
 
 const messageSchema = new mongoose.Schema<IMessage>(

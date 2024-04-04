@@ -1,9 +1,9 @@
 "use server";
 
 import mongoose from "mongoose";
-import { Chat } from "../models/chat.model";
-import { Message } from "../models/message.model";
-import { User } from "../models/user.model";
+import { Chat, IChat } from "../models/chat.model";
+import { IMessage, Message } from "../models/message.model";
+import { User, IUser } from "../models/user.model";
 import { connectToDB } from "../mongoose";
 
 export async function fetchChats(chatId: string) {
@@ -119,5 +119,54 @@ export async function fetchMessages(conversationId: string) {
     return messages;
   } catch (error: any) {
     throw new Error(`Failed to fetch messages.\nERROR:${error.message}`);
+  }
+}
+
+interface RecentChats {
+  lastestMessage: IMessage;
+  chat: IChat;
+  partner: IUser;
+}
+
+export async function fetchRecents(userId: string){
+  try {
+    connectToDB();
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return null;
+    }
+
+    const chatsIds = user.chats;
+
+    const chats = await Chat.find({ _id: { $in: chatsIds } });
+    const arr:RecentChats[]=[];
+    for (let i = 0; i < chats.length; i++) {
+      const chat = chats[i];
+      const partnerId = chat.user1.toString() === userId.toString() ? chat.user2 : chat.user1;
+      const lastestMessageId = chat.messages[chat.messages.length - 1];
+      const lastestMessage = await Message.findById(lastestMessageId);
+      const partner = await User.findById(partnerId);
+      arr.push({
+        lastestMessage,
+        partner,
+        chat
+      })
+    }
+
+    const sortedChats = arr.sort((chatA, chatB) => {
+      // Get timestamps of latest messages
+      const timestampA = chatA.lastestMessage.createdAt.getTime();
+      const timestampB = chatB.lastestMessage.createdAt.getTime();
+    
+      // Descending order for latest messages first
+      return timestampB - timestampA;
+    });
+    
+    return sortedChats;
+
+  } catch(e:any){
+    throw new Error(`Failed to fetch recents.\nERROR:${e.message}`);
   }
 }
