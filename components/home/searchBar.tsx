@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import UserSearchCard from "@/components/cards/UserSearchCard";
 import RandomUsers from "../shared/RandomUsers";
 
-const SearchBar = ({ image, id }: { image: string; id: string }) => {
+const SearchBar = ({ image, id, name }: { image: string; id: string; name:string; }) => {
   const [users, setUsers] = useState<any[]>([]);
 
   const form = useForm<z.infer<typeof SearchFormSchema>>({
@@ -60,7 +60,7 @@ const SearchBar = ({ image, id }: { image: string; id: string }) => {
           width={120}
           className="mx-auto rounded-full"
         />
-        <h2 className="text-center text-xl font-medium">Rajat</h2>
+        <h2 className="text-center text-xl font-medium">{name}</h2>
       </div>
       <div className=" mt-4 h-[1px] w-10/12 bg-primary-3"></div>
       <div className="mt-4 w-full px-7">
@@ -89,6 +89,7 @@ const SearchBar = ({ image, id }: { image: string; id: string }) => {
           </form>
         </Form>
         <div className="mt-4 flex flex-col h-auto w-full gap-4">
+          
           {users.map((user) => {
             console.log(user)
             return (

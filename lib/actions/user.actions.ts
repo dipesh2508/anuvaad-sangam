@@ -172,7 +172,7 @@ export async function getAllUsersByUsername(
     ]);
 
     if (!searchedUsers) {
-      return "No User found!";
+      return null;
     }
 
     return searchedUsers;
