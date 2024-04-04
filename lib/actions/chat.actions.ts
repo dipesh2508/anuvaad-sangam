@@ -5,6 +5,7 @@ import { Chat, IChat } from "../models/chat.model";
 import { IMessage, Message } from "../models/message.model";
 import { User, IUser } from "../models/user.model";
 import { connectToDB } from "../mongoose";
+import { translation } from "./translate.actions";
 
 export async function fetchChats(chatId: string) {
   try {
@@ -67,15 +68,28 @@ export async function sendMessage(
   try {
     connectToDB();
 
+    const chat = await Chat.findById(conversationId); //old
+
+    // const users = [chat.user1, chat.user2];
+    // users.sort();
+    // const sortedUser1 = users[0];
+    // const sortedUser2 = users[1];
+
+    const user1 = await User.findById(chat.user1);
+    const user2 = await User.findById(chat.user2);
+
+    const body1 = await translation(body, user1.language);
+    const body2 = await translation(body, user2.language);
+
     const message = await Message.create({
-      body1: body,
-      body2: body,
+      body1,
+      body2,
       senderId,
-      language1: "en",
-      language2: "en",
+      language1: user1.language,
+      language2: user2.language,
     });
 
-    const chat = await Chat.findById(conversationId); //old
+    // const chat = await Chat.findById(conversationId); //old
 
     chat.messages.push(message); //old
 
@@ -128,7 +142,7 @@ interface RecentChats {
   partner: IUser;
 }
 
-export async function fetchRecents(userId: string){
+export async function fetchRecents(userId: string) {
   try {
     connectToDB();
 
@@ -141,32 +155,32 @@ export async function fetchRecents(userId: string){
     const chatsIds = user.chats;
 
     const chats = await Chat.find({ _id: { $in: chatsIds } });
-    const arr:RecentChats[]=[];
+    const arr: RecentChats[] = [];
     for (let i = 0; i < chats.length; i++) {
       const chat = chats[i];
-      const partnerId = chat.user1.toString() === userId.toString() ? chat.user2 : chat.user1;
+      const partnerId =
+        chat.user1.toString() === userId.toString() ? chat.user2 : chat.user1;
       const lastestMessageId = chat.messages[chat.messages.length - 1];
       const lastestMessage = await Message.findById(lastestMessageId);
       const partner = await User.findById(partnerId);
       arr.push({
         lastestMessage,
         partner,
-        chat
-      })
+        chat,
+      });
     }
 
     const sortedChats = arr.sort((chatA, chatB) => {
       // Get timestamps of latest messages
       const timestampA = chatA.lastestMessage.createdAt.getTime();
       const timestampB = chatB.lastestMessage.createdAt.getTime();
-    
+
       // Descending order for latest messages first
       return timestampB - timestampA;
     });
-    
-    return sortedChats;
 
-  } catch(e:any){
+    return sortedChats;
+  } catch (e: any) {
     throw new Error(`Failed to fetch recents.\nERROR:${e.message}`);
   }
 }

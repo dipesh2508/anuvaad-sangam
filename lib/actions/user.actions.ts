@@ -223,29 +223,3 @@ export async function removeFriend(
     throw new Error(`Failed to remove friend.\nERROR:${error.message}`);
   }
 }
-
-export async function fetchRecentChats(userId: string) {
-  try {
-    connectToDB();
-
-    const user = await User.findById(userId);
-
-    const recentChatsId = await user.getRecentChats();
-
-    const recentChats = await User.aggregate([
-      {
-        $match: {
-          _id: { $in: recentChatsId },
-        },
-      },
-    ]);
-
-    if(!recentChats){
-      return null;
-    }
-
-    return recentChats;
-  } catch (error: any) {
-    throw new Error(`Failed to fetch recent chats.\nERROR:${error}`);
-  }
-}
