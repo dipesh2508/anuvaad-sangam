@@ -36,6 +36,8 @@ const MessageBox = async ({ isLast, data, conversationId }: { isLast: boolean; d
 
   const imageData = isOwn ? userData.image : otherUser.image;
 
+  const content = userData._id.toString() === user1.toString() ? data.body1: data.body2; 
+
   // const isOwn = true;
   
   const container = clsx("flex gap-3 p-4", isOwn && "justify-end");
@@ -70,7 +72,7 @@ const MessageBox = async ({ isLast, data, conversationId }: { isLast: boolean; d
               className="translate cursor-pointer object-cover transition hover:scale-110"
             />
           ) : (
-            <div>{data.body1}</div>
+            <div>{content}</div>
           )}
         </div>
         {isLast && (

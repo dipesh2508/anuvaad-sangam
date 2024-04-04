@@ -36,12 +36,8 @@ const ConversationForm = ({
   const router = useRouter();
 
   const onSubmitFunc = async (data: z.infer<typeof MessageValidation>) => {
-    
-    const text = data.message;
-    
-    const response = await translation(text, "es");
 
-    await sendMessage(senderId, conversationId, response);
+    await sendMessage(senderId, conversationId, data.message);
 
     form.reset();
     router.refresh();

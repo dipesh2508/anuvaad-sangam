@@ -1,8 +1,8 @@
-import React from 'react'
-
 const Chat = () => {
   return (
-    <div>Chat</div>
+    <div className="py-8">
+      Select a Contact to Chat in your own language
+    </div>
   )
 }
 
