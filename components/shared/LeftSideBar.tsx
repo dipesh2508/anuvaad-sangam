@@ -5,10 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { FaGear } from "react-icons/fa6";
+import { useAuth } from "@clerk/nextjs";
 
 const LeftSideBar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const { userId } = useAuth();
   const setting = pathname === "/settings";
 
   return (
@@ -33,7 +35,7 @@ const LeftSideBar = () => {
           );
         })}
         <hr />
-        <Link href="/profile">
+        <Link href={`/profile/${userId}`}>
           <div
             className={`flex items-center gap-4 rounded-md p-2 ${
               setting ? "bg-primary-1 text-primary-6" : "text-primary-8"

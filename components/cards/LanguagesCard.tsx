@@ -9,12 +9,11 @@ import { Button } from "../ui/button";
 import { Language } from "@/lib/constants/language";
 import { HiCheck } from "react-icons/hi2";
 import { updateLanguage } from "@/lib/actions/language.actions";
+import {usePathname, useRouter} from 'next/navigation'
 
 const LanguagesCard = ({ languages, userLang, id }: { languages: Language; userLang: string; id:string; }) => {
-
-  async function onClick() {
-    await updateLanguage({userId:id, language: languages.value});
-  }
+  const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <Card className="w-full">
@@ -32,12 +31,15 @@ const LanguagesCard = ({ languages, userLang, id }: { languages: Language; userL
           </div>
           <div>
             {!(userLang === languages.value) && 
-            <Button size={"sm"} onClick={onClick}>
+            <Button size={"sm"} onClick={async ()=>{
+              await updateLanguage(id, languages.value, pathname);
+              router.refresh();
+            }}>
               <HiCheck size={15} />
             </Button>
 }
             {(userLang === languages.value) &&
-            <Button size={"sm"} onClick={onClick} disabled variant={"success"}>
+            <Button size={"sm"} disabled variant={"success"}>
                 <HiCheck size={15} />
             </Button>
             }

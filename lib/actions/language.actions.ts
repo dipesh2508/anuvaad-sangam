@@ -4,12 +4,8 @@ import { User } from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import { revalidatePath } from "next/cache";
 
-interface IUpdateLanguage {
-  userId: string;
-  language: string;
-}
 
-export async function updateLanguage({ userId, language }: IUpdateLanguage) {
+export async function updateLanguage( userId:string, language:string, pathname:string) {
   try {
     connectToDB();
 
@@ -19,20 +15,18 @@ export async function updateLanguage({ userId, language }: IUpdateLanguage) {
     );
 
     if (!user) {
-      return "No User Found.";
+      return null;
     }
 
     if (user.language === language) {
-      return "Choose different language from the previous one.";
+      return null;
     }
 
     user.language = language;
 
     await user.save();
 
-    revalidatePath("/language");
-
-    return "Language Updated Successfully.";
+    revalidatePath(pathname);
   } catch (error: any) {
     throw new Error(`Failed to Update language.\nERROR:${error.message}`);
   }

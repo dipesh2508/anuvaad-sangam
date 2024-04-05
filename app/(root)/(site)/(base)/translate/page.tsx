@@ -7,10 +7,12 @@ import { languages } from "@/lib/constants/language";
 import LanguagesCard from "@/components/cards/LanguagesCard";
 
 const Page = async () => {
+
   const user = await currentUser();
   if (!user) {
     redirect("/sign-in");
   }
+  
 
   const userData = await fetchUser(user.id);
 
@@ -21,6 +23,7 @@ const Page = async () => {
   if(!languages){
     return null;
   }
+
 
   return (
     <div className="grid h-[90vh] w-full grid-cols-12">
@@ -46,7 +49,7 @@ const Page = async () => {
           <div className="mb-12 mt-2 flex flex-col gap-2">
             {languages.map((language, index) => (
               <div key={index} className="flex gap-4">
-                <LanguagesCard languages={language} userLang={userData.language} id={userData._id} />
+                <LanguagesCard languages={language} userLang={userData.language} id={userData.id} />
               </div>
             ))}
           </div>

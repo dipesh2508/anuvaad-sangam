@@ -29,7 +29,7 @@ import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { languages, Language } from "@/lib/constants/language";
 import { updateLanguage } from "@/lib/actions/language.actions";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   languages: z.string({
@@ -38,19 +38,20 @@ const FormSchema = z.object({
 });
 
 const LanguageSelectorForm = ({
-  id,
+  id
 }:{
   id: string;
 }) => {
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-    await updateLanguage({userId:id, language: values.languages});
+    await updateLanguage(id, values.languages, pathname);
 
     //map language value to key
     const language = languages.find((lang) => lang.value === values.languages);

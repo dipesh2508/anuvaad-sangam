@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { IoExitOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
-import { SignOutButton, SignedIn } from "@clerk/nextjs";
+import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 
 import {
   AlertDialog,
@@ -22,6 +22,7 @@ import {
 const SettingSideBar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const { userId } = useAuth();
 
   return (
     <section className="border-r-dark-4 bg-dark-2 sticky top-0 z-20 flex h-[90vh] w-fit flex-col justify-between overflow-auto border-r pb-5 pt-28 max-md:hidden">
@@ -30,6 +31,10 @@ const SettingSideBar = () => {
           const isActive =
             (pathname.includes(link.route) && link.route.length > 1) ||
             pathname === link.route;
+
+            if (link.route === "/profile") {
+              link.route = `${link.route}/${userId}`;
+            }
 
           let Icon = link.icon;
           return (
