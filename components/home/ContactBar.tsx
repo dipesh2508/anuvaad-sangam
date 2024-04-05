@@ -43,6 +43,7 @@ const ContactBar = ({ image, id, name }: { image: string; id: string ; name: str
                             username={contact.username}
                             id={id}
                             userId={contact._id}
+                            OtherId={contact.id}
                         />
                     </div>
                 );

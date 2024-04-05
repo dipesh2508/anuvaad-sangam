@@ -5,12 +5,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { languages } from "@/lib/constants/language";
-
+import { currentUser } from "@clerk/nextjs";
 interface IParams{
     id: string;
 }
 
 const page = async ({ params }: { params: IParams }) => {
+
+    const user = await currentUser();
+    if(!user){
+      redirect("/sign-in");
+    }
+  
+    const myUserData = await fetchUser(user.id);
+  
+    if (!myUserData) {
+      redirect("/onboarding");
+    }
     const userData = await fetchUser(params.id);
 
 
@@ -32,9 +43,11 @@ const page = async ({ params }: { params: IParams }) => {
             <h4 className=" text-lg font-primary">@{userData.username}</h4>
             </div>
             </div>
+            { user.id === userData.id &&
             <Link href="/profile/edit">
             <Button className="flex flex-row gap-2">Edit <Edit3/></Button>
             </Link>
+}
         </div>
         <div className="flex flex-col h-fit justify-between px-8 w-full gap-4">
             <h2 className="font-semibold text-xl">User Details</h2>

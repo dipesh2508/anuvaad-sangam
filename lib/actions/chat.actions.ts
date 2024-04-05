@@ -162,6 +162,7 @@ export async function fetchRecents(userId: string) {
         chat.user1.toString() === userId.toString() ? chat.user2 : chat.user1;
       const lastestMessageId = chat.messages[chat.messages.length - 1];
       const lastestMessage = await Message.findById(lastestMessageId);
+      if(!lastestMessage) continue;
       const partner = await User.findById(partnerId);
       arr.push({
         lastestMessage,
