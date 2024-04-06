@@ -42,5 +42,23 @@ export const languages: Language[] = [
         key: "German",
         value: 'de',
         image: Germany
+    },
+    {
+        id: 6,
+        key: "Punjabi",
+        value: 'pa',
+        image: India
+    },
+    {
+        id: 7,
+        key: "Bengali",
+        value: 'bn',
+        image: India
+    },
+    {
+        id: 8,
+        key: "Tamil",
+        value: 'ta',
+        image: India
     }
 ]
