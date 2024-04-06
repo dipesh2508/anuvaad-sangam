@@ -11,15 +11,7 @@ const Feature3 = () => {
             <br /> <span className="text-secondary-3">Any Device</span>
           </h2>
           <p className="text-justify font-primary text-base font-light md:text-left md:text-lg">
-            Lorem ipsum dolor sit amet consectetur. Sollicitudin quisque in amet
-            consectetur sed eget egestas. Pulvinar leo amet cursus tellus
-            gravida nulla. Diam quis volutpat sit lobortis ac. Etiam arcu non
-            erat pellentesque. Amet in mollis ac arcu ullamcorper pellentesque
-            nibh hendrerit netus. Suspendisse pellentesque condimentum morbi in
-            lacus magna. Proin est gravida sagittis magna. Consectetur aliquam
-            at viverra sed bibendum nam tortor lorem vehicula. Felis ac mi
-            pellentesque proin dui ac adipiscing erat. Nibh in turpis hac cum
-            nulla.{" "}
+          Connect with anyone, anytime, anywhere with Anuvaad Sangam. Break free from language barriers and communicate effortlessly with individuals from across the globe. Whether it's day or night, our platform ensures seamless communication for all.{" "}
           </p>
         </div>
         <div className="md:col-span-2">

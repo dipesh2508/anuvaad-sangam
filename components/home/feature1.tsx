@@ -11,15 +11,7 @@ const Feature1 = () => {
             <br /> <span className="text-secondary-3">Your Rules</span>
           </h2>
           <p className="text-justify font-primary text-base font-light md:text-left md:text-lg">
-            Lorem ipsum dolor sit amet consectetur. Sollicitudin quisque in amet
-            consectetur sed eget egestas. Pulvinar leo amet cursus tellus
-            gravida nulla. Diam quis volutpat sit lobortis ac. Etiam arcu non
-            erat pellentesque. Amet in mollis ac arcu ullamcorper pellentesque
-            nibh hendrerit netus. Suspendisse pellentesque condimentum morbi in
-            lacus magna. Proin est gravida sagittis magna. Consectetur aliquam
-            at viverra sed bibendum nam tortor lorem vehicula. Felis ac mi
-            pellentesque proin dui ac adipiscing erat. Nibh in turpis hac cum
-            nulla.{" "}
+          Personalize your presence on Anuvaad Sangam with customizable profiles. Showcase your identity, interests, and preferences to connect with like-minded individuals effortlessly. Tailor your profile to reflect the true essence of who you are in our vibrant community.{" "}
           </p>
         </div>
         <div className="md:col-span-2">

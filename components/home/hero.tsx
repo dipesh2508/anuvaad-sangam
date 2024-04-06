@@ -21,8 +21,7 @@ const Hero = () => {
           className="absolute -right-10 -top-8"
         />
         <div className="font-primary text-base md:text-xl font-extralight text-light-3 text-center md:text-left">
-          Lorem ipsum dolor sit amet consectetur. Suspendisse cursus cras
-          fermentum dui. Amet mi hendrerit etiam ipsum.{" "}
+        Welcome to Anuvaad Sangam, where every language finds its voice. Join us in breaking down barriers and fostering global connections through seamless cross-language communication.{" "}
         </div>
         <div className="text-center md:text-left">
           <Link href="/sign-up">

@@ -14,9 +14,7 @@ const CTA = () => {
           Express yourself in any language
         </h2>
         <p className="md:text-justify font-primary text-sm font-light text-secondary-4 md:text-base">
-          Lorem ipsum dolor sit amet consectetur. Sollicitudin quisque in amet
-          consectetur sed eget egestas. Pulvinar leo amet cursus tellus gravida
-          nulla. Diam quis volutpat sit lobortis ac.
+        Converse fluently in any language with Anuvaad Sangam. Break language barriers and engage in meaningful conversations with friends, colleagues, and global communities. From English to Mandarin, Spanish to Arabic, your conversations are seamlessly translated for universal understanding.
         </p>
         <Link href="/about">
           <Button className="mt-4" variant="cta">
