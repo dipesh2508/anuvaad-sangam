@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { IChat } from "@/lib/models/chat.model";
 export interface IUser {
+  _id: mongoose.ObjectId
   id: string;
   name: string;
   username: string;

@@ -30,7 +30,7 @@ interface IParams {
     return (
       <div>
         <ConversationHeader conversationId={conversationId} />
-        <ConversationBody conversationId={conversationId} />
+        <ConversationBody conversationId={conversationId} userData={userData} />
         <ConversationForm conversationId={conversationId} senderId={userData._id} />
       </div>
     );
