@@ -21,7 +21,7 @@ const ConversationBody = ({conversationId, userData}:{
       }
 
       fetchMessage();
-    })
+    }, [])
 
 
     // const messages = await fetchMessages(conversationId);
