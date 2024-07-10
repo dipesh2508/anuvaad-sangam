@@ -5,26 +5,36 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { fetchUser, fetchUserById } from "@/lib/actions/user.actions";
 import { fetchChats } from "@/lib/actions/chat.actions";
+import { useState, useEffect } from "react";
 
-const MessageBox = async ({ isLast, data, conversationId }: { isLast: boolean; data: any; conversationId:string }) => {
+const MessageBox = ({ isLast, data, conversationId, userData }: { isLast: boolean; data: any; conversationId:string, userData: any }) => {
 
-  const user = await currentUser();
-  if(!user){
-    redirect("/sign-in");
-  }
+  // const user = await currentUser();
+  // if(!user){
+  //   redirect("/sign-in");
+  // }
 
-  const userData = await fetchUser(user.id);
+  // const userData = await fetchUser(user.id);
 
   if (!userData) {
     redirect("/onboarding");
   }
 
-  const chat = await fetchChats(conversationId);
+  // const [chat, setChat] = useState<any[]>([]);
 
-  if (!chat) {
-    return null;
-  }
+  const [isOwn, setIsOwn] = useState<boolean>(false);
+  const [imageData, setImageData] = useState<string>("");
+  const [content, setContent] = useState<string>("");
 
+  useEffect(()=> {
+    const fetchChat = async () => {
+      const chat = await fetchChats(conversationId);
+
+      if(!chat){
+        return
+      }
+
+      
   const user1 = chat.user1;
   const user2 = chat.user2;
 
@@ -36,7 +46,35 @@ const MessageBox = async ({ isLast, data, conversationId }: { isLast: boolean; d
 
   const imageData = isOwn ? userData.image : otherUser.image;
 
-  const content = userData._id.toString() === user1.toString() ? data.body1: data.body2; 
+  const content = userData._id.toString() === user1.toString() ? data.body1: data.body2;
+
+      setIsOwn(isOwn);
+      setImageData(imageData);
+      setContent(content);
+
+    }
+
+    fetchChat();
+  }, [ conversationId, data.senderId, userData._id, data.body1, data.body2, userData.image])
+
+
+
+  // if (!chat) {
+  //   return null;
+  // }
+
+  // const user1 = chat.user1;
+  // const user2 = chat.user2;
+
+  // const otherUserId = userData._id.toString() === user1.toString() ? user2 : user1;
+
+  // const isOwn = otherUserId.toString() === data.senderId.toString() ? false: true;
+
+  // const otherUser = await fetchUserById(otherUserId);
+
+  // const imageData = isOwn ? userData.image : otherUser.image;
+
+  // const content = userData._id.toString() === user1.toString() ? data.body1: data.body2; 
 
   // const isOwn = true;
   

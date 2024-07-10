@@ -1,11 +1,30 @@
-import { useRef } from "react";
+"use client"
+
+import {useState, useEffect, useRef } from "react";
 import MessageBox from "./MessageBox";
 import { fetchMessages } from "@/lib/actions/chat.actions";
-const ConversationBody = async ({conversationId}:{
+const ConversationBody = ({conversationId, userData}:{
     conversationId: string;
+    userData: any;
 }) => {
 
-    const messages = await fetchMessages(conversationId);
+  const [messages, setMessages] = useState<any[]>([]);
+
+    useEffect(()=> {
+      const fetchMessage = async () => {
+        const messages = await fetchMessages(conversationId);
+
+        if(!messages){
+          return
+        }
+        setMessages(messages);
+      }
+
+      fetchMessage();
+    }, [])
+
+
+    // const messages = await fetchMessages(conversationId);
 
     if(!messages){
         return <div>no message</div>
@@ -26,6 +45,7 @@ const ConversationBody = async ({conversationId}:{
               key={message.id}
               data={message}
               conversationId={conversationId}
+              userData={userData}
             />
           ))}
         </div>
